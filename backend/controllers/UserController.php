@@ -86,13 +86,11 @@ class UserController extends BackendController
         if(Yii::$app->request->isPost)
         {
             $model->load($_POST);
-            if($model->load($_POST) && $model->save())
-            {
+            if(1==2 && $model->load($_POST) && $model->save())
                 Yii::$app->session->setFlash('success');
-                return $this->goBack(['user/index']);
-            }else
-                return MyHelper::dump($model->getErrors());
-//                Yii::$app->session->setFlash('fail','添加失败');
+            else
+                Yii::$app->session->setFlash('fail','添加失败');
+            return $this->goBack(['user/index']);
         }
     }
 

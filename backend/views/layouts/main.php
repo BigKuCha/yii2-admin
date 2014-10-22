@@ -286,6 +286,13 @@ AppAsset::register($this);
                     'type' => Alert::TYPE_SUCCESS,
                 ]) ?>
             <?php endif; ?>
+            <?php if (Yii::$app->session->getFlash('fail')): ?>
+                <?=
+                Alert::widget([
+                    'body' => Yii::$app->session->getFlash('fail'),
+                    'type' => Alert::TYPE_DANGER,
+                ]) ?>
+            <?php endif; ?>
             <?= $content ?>
         </div>
         <!-- /.row -->
