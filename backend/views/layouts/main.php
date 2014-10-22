@@ -20,7 +20,7 @@
  */
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-
+use kartik\widgets\Alert;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -28,7 +28,7 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="utf-8"/>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Yii::$app->params['webname'].'-'.(is_array($this->params['breadcrumbs'])?end($this->params['breadcrumbs']):'未定义') ?></title>
     <!-- basic styles -->
 
     <!--[if IE 7]>
@@ -272,19 +272,10 @@ AppAsset::register($this);
 </div>
 <div class="main-content">
     <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('breadcrumbs', 'fixed')
-            } catch (e) {
-            }
-        </script>
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/">Home</a>
-            </li>
-            <li class="active">Typography</li>
-        </ul>
+        <?= \yii\widgets\Breadcrumbs::widget([
+            'itemTemplate' => "<li>{link}</li>\n",
+            'links'=>$this->params['breadcrumbs']?:['未定义'],
+        ]) ?>
         <!-- .breadcrumb -->
         <div class="nav-search" id="nav-search">
             <form class="form-search">
@@ -300,6 +291,14 @@ AppAsset::register($this);
     <div class="page-content">
         <!-- /.page-header -->
         <div class="row">
+            <?php if ($msg = Yii::$app->session->getFlash('success')): ?>
+                <?=
+                Alert::widget([
+                    'body' => ($msg==1)?'操作成功':$msg,
+                    'delay' => 1000,
+                    'type' => Alert::TYPE_SUCCESS,
+                ]) ?>
+            <?php endif; ?>
             <?= $content ?>
         </div>
         <!-- /.row -->

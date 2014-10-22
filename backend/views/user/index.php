@@ -20,7 +20,11 @@
  */
 use yii\grid\SerialColumn;
 use yii\bootstrap\Modal;
+$this->params['breadcrumbs'] = [
+    '用户管理',
+];
 ?>
+
 <?php
 Modal::begin([
     'id'=>'md',
@@ -28,11 +32,13 @@ Modal::begin([
     'footer'=>'<button type="button" class="btn btn-primary" onclick="sbmt()">确定</button>',
 ]);
 $form = \yii\widgets\ActiveForm::begin([
-    'id'=>'userform'
+    'id'=>'userform',
+    'action'=>'adduser',
+    'validationUrl'=>'ajaxvalidate',
 ])
 ?>
 
-<?= $form->field($model,'username')->textInput() ?>
+<?= $form->field($model,'username',['enableAjaxValidation'=>true])->textInput() ?>
 <?= $form->field($model,'password')->passwordInput() ?>
 <?= $form->field($model,'password_repeat')->passwordInput() ?>
 

@@ -29,6 +29,7 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            ['username','unique'],
             [['username', 'password','password_repeat'], 'required'],
             [['username', 'password'], 'string', 'max' => 255],
             ['password_repeat','compare','compareAttribute'=>'password']
@@ -47,7 +48,12 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
             'password_repeat'=>'重复输入密码'
         ];
     }
-
+    public function beforeSave($insert)
+    {
+        if($this->isNewRecord || $this->password!=$this->oldAttributes['password'])
+            $this->password = Yii::$app->security->generatePasswordHash($this->password);
+        return true;
+    }
     public static function findByusername($username)
     {
         return static::find()->where('username=:u',[':u'=>$username])->one();

@@ -26,6 +26,8 @@ use app\models\LoginForm;
 use Yii;
 use app\models\TAdmUser;
 use yii\data\ActiveDataProvider;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class UserController extends BackendController
 {
@@ -62,18 +64,50 @@ class UserController extends BackendController
         ]);
     }
 
+    /**
+     * 登出
+     * @return \yii\web\Response
+     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
         return $this->goHome();
     }
+
+    /**
+     * 添加用户
+     * @return null|string
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
+     */
     public function actionAdduser()
     {
         $model = new TAdmUser();
-        $model->username = 'admin';
-        $model->password = Yii::$app->security->generatePasswordHash('admin');
-        $model->password_repeat = $model->password;
-        $model->save();
-        return MyHelper::dump($model->getErrors());
+        if(Yii::$app->request->isPost)
+        {
+            $model->load($_POST);
+            if($model->load($_POST) && $model->save())
+            {
+                Yii::$app->session->setFlash('success');
+                return $this->goBack(['user/index']);
+            }else
+                return MyHelper::dump($model->getErrors());
+//                Yii::$app->session->setFlash('fail','添加失败');
+        }
+    }
+
+    /**
+     * ajax验证是否存在
+     * @return array
+     */
+    public function actionAjaxvalidate()
+    {
+        $model = new TAdmUser();
+        if(Yii::$app->request->isAjax)
+        {
+            $model->load($_POST);
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model,'username');
+        }
     }
 } 

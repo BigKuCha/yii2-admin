@@ -1,4 +1,4 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
+    'webname'=>'Nevermore后台管理系统',
 ];
