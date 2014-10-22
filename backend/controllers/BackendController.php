@@ -27,7 +27,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 class BackendController extends Controller
 {
-    /*public function behaviors()
+    public function behaviors()
     {
         return [
             'access' => [
@@ -47,9 +47,9 @@ class BackendController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+//                    'logout' => ['post'],
                 ],
             ],
         ];
-    }*/
+    }
 }
