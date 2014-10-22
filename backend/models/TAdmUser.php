@@ -45,7 +45,7 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
             'id' => 'ID',
             'username' => '用户名',
             'password' => '密码',
-            'password_repeat'=>'重复输入密码'
+            'password_repeat'=>'重复密码'
         ];
     }
     public function beforeSave($insert)
