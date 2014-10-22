@@ -186,17 +186,10 @@ AppAsset::register($this);
     </div>
     <!-- #sidebar-shortcuts -->
     <ul class="nav nav-list">
-        <li class="active">
-            <a href="typography.html">
-                <i class="icon-text-width"></i>
-                <span class="menu-text"> 文字排版 </span>
-            </a>
-        </li>
-
         <li>
             <a href="#" class="dropdown-toggle">
                 <i class="icon-desktop"></i>
-                <span class="menu-text"> UI 组件 </span>
+                <span class="menu-text"> 设置 </span>
 
                 <b class="arrow icon-angle-down"></b>
             </a>
@@ -211,34 +204,21 @@ AppAsset::register($this);
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-double-angle-right"></i>
-
-                        三级菜单
+                        系统设置
                         <b class="arrow icon-angle-down"></b>
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="#">
+                            <a href="/sys/menu">
                                 <i class="icon-leaf"></i>
-                                第一级
+                                菜单管理
                             </a>
                         </li>
-
                         <li>
-                            <a href="#" class="dropdown-toggle">
-                                <i class="icon-pencil"></i>
-
-                                第四级
-                                <b class="arrow icon-angle-down"></b>
+                            <a href="/user">
+                                <i class="icon-leaf"></i>
+                                用户管理
                             </a>
-
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">
-                                        <i class="icon-plus"></i>
-                                        添加产品
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </li>

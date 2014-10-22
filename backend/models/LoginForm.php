@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use backend\models\TAdmUser;
 use Yii;
 use yii\base\Model;
 

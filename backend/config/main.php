@@ -14,7 +14,7 @@ return [
     'modules' => [],
     'components' => [
         'user' => [
-            'identityClass' => 'app\models\TAdmUser',
+            'identityClass' => 'backend\models\TAdmUser',
             'enableAutoLogin' => true,
         ],
         'request'=>[

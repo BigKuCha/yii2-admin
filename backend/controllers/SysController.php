@@ -17,6 +17,7 @@ class SysController extends BackendController
      */
     public function actionMenu()
     {
+
         return $this->render('menu',[
 
         ]);

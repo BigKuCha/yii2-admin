@@ -21,10 +21,11 @@
 
 namespace backend\controllers;
 
+use backend\models\TMenu;
 use common\components\MyHelper;
 use app\models\LoginForm;
 use Yii;
-use app\models\TAdmUser;
+use backend\models\TAdmUser;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
@@ -107,5 +108,14 @@ class UserController extends BackendController
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model,'username');
         }
+    }
+
+    public function actionMenu()
+    {
+        $list = TMenu::find()->where('level=1')->all();
+        return $this->render('menu',[
+            'list'=>$list,
+        ]);
+        return MyHelper::dump($list);
     }
 } 
