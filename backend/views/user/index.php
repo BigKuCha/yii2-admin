@@ -45,6 +45,11 @@ Modal::end();
     'dataProvider'=>$dataprovider,
     'columns'=>[
         ['class' => SerialColumn::className()],
+        'username',
+        'password',
+        [
+            'class'=>'yii\grid\ActionColumn'
+        ],
     ],
 ]) ?>
 <script>

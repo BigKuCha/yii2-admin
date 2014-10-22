@@ -27,7 +27,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 class HomeController extends BackendController
 {
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'access' => [
@@ -55,7 +55,7 @@ class HomeController extends BackendController
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * @inheritdoc
