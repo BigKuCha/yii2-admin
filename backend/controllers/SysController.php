@@ -9,6 +9,8 @@
 namespace backend\controllers;
 
 
+use backend\models\TMenu;
+
 class SysController extends BackendController
 {
     /**
@@ -17,9 +19,9 @@ class SysController extends BackendController
      */
     public function actionMenu()
     {
-
+        $list = TMenu::find()->where('level=1')->all();
         return $this->render('menu',[
-
+            'list'=>$list,
         ]);
     }
 } 

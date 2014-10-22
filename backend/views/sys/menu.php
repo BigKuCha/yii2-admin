@@ -25,33 +25,55 @@ $this->registerJs("
 ?>
 <div class="tree">
     <ul>
-        <li>
-            <span><i class="icon-folder-open"></i> 系统管理</span> <a href=""></a>
-            <a class="icon-plus" href="javascript:;"
-               onclick="add('add',<?= $v->id; ?> , <?= $v->level ?>)" title="添加"></a>
-            <a class="icon-edit" href="javascript:;"
-               onclick="add('edit',<?= $v->id; ?> , <?= $v->level ?>)" title="编辑"></a>
-            <a class="icon-trash" href="javascript:;" onclick="del(<?= $v->id; ?>,<?= $v->level ?>)" title="删除"></a>
-            <ul>
-                <li>
-                    <span><i class="icon-minus-sign"></i> 系统管理</span> <a href=""></a>
-                    <a class="icon-plus" href="javascript:;"
-                       onclick="add('add',<?= $son->id; ?> , <?= $son->level ?>)" title="添加"></a>
-                    <a class="icon-edit" href="javascript:;"
-                       onclick="add('edit',<?= $son->id; ?> , <?= $son->level ?>)" title="编辑"></a>
-                    <a class="icon-trash" href="javascript:;"
-                       onclick="del(<?= $son->id; ?>,<?= $son->level ?>  )" title="删除"></a>
-                    <ul>
-                        <li>
-                            <span><i class="icon-leaf"></i> 权限管理</span> <a href=""></a>
-                            <a class="icon-edit" href="javascript:;"
-                               onclick="add('edit',<?= $gson->id; ?> , <?= $gson->level ?>)" title="编辑"></a>
-                            <a class="icon-trash" href="javascript:;"
-                               onclick="del(<?= $gson->id; ?>,<?= $gson->level ?>)" title="删除"></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
+        <!--一级菜单-->
+        <?php foreach ($list as $father): ?>
+            <li>
+                <span><i class="icon-folder-open"></i> <?= $father->menuname ?></span> <a href=""></a>
+                <a class="icon-plus" href="javascript:;"
+                   onclick="add('add',<?= $v->id; ?> , <?= $v->level ?>)" title="添加"></a>
+                <a class="icon-edit" href="javascript:;"
+                   onclick="add('edit',<?= $v->id; ?> , <?= $v->level ?>)" title="编辑"></a>
+                <a class="icon-trash" href="javascript:;" onclick="del(<?= $v->id; ?>,<?= $v->level ?>)" title="删除"></a>
+                <ul>
+                    <!--二级菜单-->
+                    <?php foreach ($father->getSon()->all() as $son): ?>
+                        <!--一级菜单下的3级菜单-->
+                        <?php if ($son->level == 3): ?>
+                            <li>
+                                <span><i class="icon-leaf"></i> <?= $son->menuname ?></span> <a href=""></a>
+                                <a class="icon-edit" href="javascript:;"
+                                   onclick="add('edit',<?= $gson->id; ?> , <?= $gson->level ?>)" title="编辑"></a>
+                                <a class="icon-trash" href="javascript:;"
+                                   onclick="del(<?= $gson->id; ?>,<?= $gson->level ?>)" title="删除"></a>
+                            </li>
+                        <?php else: ?>
+                            <li>
+                                <span><i class="icon-minus-sign"></i> <?= $son->menuname ?></span> <a href=""></a>
+                                <a class="icon-plus" href="javascript:;"
+                                   onclick="add('add',<?= $son->id; ?> , <?= $son->level ?>)" title="添加"></a>
+                                <a class="icon-edit" href="javascript:;"
+                                   onclick="add('edit',<?= $son->id; ?> , <?= $son->level ?>)" title="编辑"></a>
+                                <a class="icon-trash" href="javascript:;"
+                                   onclick="del(<?= $son->id; ?>,<?= $son->level ?>  )" title="删除"></a>
+                                <ul>
+                                    <!--三级菜单-->
+                                    <?php foreach ($son->getSon()->all() as $gson): ?>
+                                        <li>
+                                            <span><i class="icon-leaf"></i> <?= $gson->menuname ?></span> <a
+                                                href=""></a>
+                                            <a class="icon-edit" href="javascript:;"
+                                               onclick="add('edit',<?= $gson->id; ?> , <?= $gson->level ?>)"
+                                               title="编辑"></a>
+                                            <a class="icon-trash" href="javascript:;"
+                                               onclick="del(<?= $gson->id; ?>,<?= $gson->level ?>)" title="删除"></a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </li>
+        <?php endforeach; ?>
     </ul>
 </div>

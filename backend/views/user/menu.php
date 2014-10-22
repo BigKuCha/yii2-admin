@@ -33,7 +33,7 @@
             <?php foreach($father->getSon()->all() as $son): ?>
                 <?php if($son->level==3): ?>
                     <li>
-                        <a href="elements.html">
+                        <a href="/<?= $son->route ?>">
                             <i class="icon-double-angle-right"></i>
                             <?= $son->menuname ?>
                         </a>
@@ -48,7 +48,7 @@
                         <ul class="submenu">
                             <?php foreach($son->getSon()->all() as $gson): ?>
                             <li>
-                                <a href="/sys/menu">
+                                <a href="/<?= $gson->route ?>">
                                     <i class="icon-leaf"></i>
                                     <?= $gson->menuname ?>
                                 </a>
