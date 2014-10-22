@@ -57,10 +57,10 @@ AppAsset::register($this);
 
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand">
+            <a href="#" class="navbar-brand" style="height: 40px">
                 <small>
-                    <i class="icon-leaf"></i>
-                    Ace Admin
+                    <i class="icon-flag"></i>
+                    Nevermore
                 </small>
             </a><!-- /.brand -->
         </div>
