@@ -21,6 +21,7 @@
 
 namespace backend\controllers;
 
+use kartik\widgets\ActiveForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -76,6 +77,9 @@ class BackendController extends Controller
         ]);
         Yii::$container->set('yii\grid\ActionColumn',[
             'template'=>'{update} {delete}',
+        ]);
+        Yii::$container->set(ActiveForm::className(),[
+            'type'=>ActiveForm::TYPE_HORIZONTAL,
         ]);
     }
 }

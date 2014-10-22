@@ -35,7 +35,6 @@ Modal::begin([
 $form = ActiveForm::begin([
     'id'=>'userform',
     'action'=>'adduser',
-    'type'=>ActiveForm::TYPE_HORIZONTAL,
     'validationUrl'=>'ajaxvalidate',
 ])
 ?>
@@ -57,10 +56,14 @@ Modal::end();
 <?= \yii\grid\GridView::widget([
     'dataProvider'=>$dataprovider,
     'columns'=>[
-        ['class' => SerialColumn::className()],
+        [
+            'header'=>'编号',
+            'class' => SerialColumn::className()
+        ],
         'username',
         'password',
         [
+            'header'=>'操作',
             'class'=>'yii\grid\ActionColumn'
         ],
     ],
