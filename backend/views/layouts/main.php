@@ -83,15 +83,14 @@ AppAsset::register($this);
                         <li>
                             <a href="#">
                                 <div class="clearfix">
-											<span class="pull-left">
-												<i class="btn btn-xs no-hover btn-pink icon-comment"></i>
-												New Comments
-											</span>
+                                    <span class="pull-left">
+                                        <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
+                                        New Comments
+                                    </span>
                                     <span class="pull-right badge badge-info">+12</span>
                                 </div>
                             </a>
                         </li>
-
                         <li>
                             <a href="#">
                                 查看所有通知
@@ -118,16 +117,13 @@ AppAsset::register($this);
                                 设置
                             </a>
                         </li>
-
                         <li>
                             <a href="#">
                                 <i class="icon-user"></i>
                                 个人信息
                             </a>
                         </li>
-
                         <li class="divider"></li>
-
                         <li>
                             <a href="user/logout">
                                 <i class="icon-off"></i>
@@ -145,12 +141,6 @@ AppAsset::register($this);
 </div>
 
 <div class="main-container" id="main-container">
-<script type="text/javascript">
-    try {
-        ace.settings.check('main-container', 'fixed')
-    } catch (e) {
-    }
-</script>
 
 <div class="main-container-inner">
 <a class="menu-toggler" id="menu-toggler" href="#">
@@ -218,8 +208,6 @@ AppAsset::register($this);
                         组件
                     </a>
                 </li>
-
-
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-double-angle-right"></i>
@@ -227,7 +215,6 @@ AppAsset::register($this);
                         三级菜单
                         <b class="arrow icon-angle-down"></b>
                     </a>
-
                     <ul class="submenu">
                         <li>
                             <a href="#">
@@ -306,52 +293,6 @@ AppAsset::register($this);
     <!-- /.page-content -->
 </div>
 <!-- /.main-content -->
-<div class="ace-settings-container" id="ace-settings-container">
-    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-        <i class="icon-cog bigger-150"></i>
-    </div>
-    <div class="ace-settings-box" id="ace-settings-box">
-        <div>
-            <div class="pull-left">
-                <select id="skin-colorpicker" class="hide">
-                    <option data-skin="default" value="#438EB9">#438EB9</option>
-                    <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                    <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                    <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                </select>
-            </div>
-            <span>&nbsp; Choose Skin</span>
-        </div>
-
-        <div>
-            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar"/>
-            <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-        </div>
-
-        <div>
-            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar"/>
-            <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-        </div>
-
-        <div>
-            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs"/>
-            <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-        </div>
-
-        <div>
-            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"/>
-            <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-        </div>
-
-        <div>
-            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container"/>
-            <label class="lbl" for="ace-settings-add-container">
-                Inside
-                <b>.container</b>
-            </label>
-        </div>
-    </div>
-</div>
 <!-- /#ace-settings-container -->
 </div>
 <!-- /.main-container-inner -->

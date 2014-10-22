@@ -29,7 +29,7 @@ $this->params['breadcrumbs'] = [
 <?php
 Modal::begin([
     'id'=>'md',
-    'header' => '<h2>添加用户</h2>',
+    'header' => '<h4>添加用户</h4>',
     'footer'=>'<button type="button" class="btn btn-primary" onclick="sbmt()">确定</button>',
 ]);
 $form = ActiveForm::begin([
