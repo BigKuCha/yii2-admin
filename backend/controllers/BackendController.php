@@ -104,6 +104,9 @@ class BackendController extends Controller
 
     public function beforeAction($action)
     {
+        $route = Yii::$app->requestedRoute;
+        if(!Yii::$app->authManager->getPermission($route))
+            return true;
         return true;
     }
     public function getMenulist()
