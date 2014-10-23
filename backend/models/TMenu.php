@@ -57,15 +57,32 @@ class TMenu extends \yii\db\ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         $auth = Yii::$app->authManager;
-        $permission = $auth->createPermission($this->route);
-        $permission->description = $this->menuname;
-        $auth->add($permission);
+        if($insert)
+        {
+            $permission = $auth->createPermission($this->route);
+            $permission->description = $this->menuname;
+            $auth->add($permission);
+        }else
+        {
+            $permission = $auth->getPermission($changedAttributes['route']);
+            $permission->name = $this->route;
+            $permission->description = $this->menuname;
+            $auth->update($changedAttributes['route'],$permission);
+        }
+
     }
 
     public function afterDelete()
     {
         parent::afterDelete();
-        Yii::$app->authManager->remove(Yii::$app->authManager->getPermission($this->route));
+        //删除所有权限
+        $sql = 'select name from auth_item where name not in (select route from t_menu)';
+        $p = Yii::$app->db->createCommand($sql)->query();
+        $auth = Yii::$app->authManager;
+        foreach($p as $name)
+        {
+            $auth->remove($auth->getPermission($name));
+        }
     }
     /**
      * 获取子菜单

@@ -39,13 +39,15 @@ $this->params['breadcrumbs'] = [
         </li>
         <li>
             <ul>
+                <?php \yii\widgets\Pjax::begin([]) ?>
                 <!--一级菜单-->
                 <?php foreach ($list as $father): ?>
                     <li>
                         <span><i class="icon-folder-open"></i> <?= $father->menuname ?></span> <a href=""></a>
                         <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>$father->id,'level'=>$father->level]) ?>" title="添加"></a>
-                        <a class="icon-edit" href=""  title="编辑"></a>
-                        <a class="icon-trash" href="" title="删除"></a>
+                        <a class="icon-edit" href="<?= Url::to(['sys/menumange','id'=>$father->id]) ?>"  title="编辑"></a>
+                        <a class="icon-trash" href="<?= Url::to(['sys/menudel','id'=>$father->id,'level'=>$father->level]) ?>" data-method="post"  data-confirm="确定要删除当前菜单以及所有子菜单吗?" title="删除"></a>
+
                         <ul>
                             <!--二级菜单-->
                             <?php foreach ($father->getSon()->all() as $son): ?>
@@ -53,9 +55,8 @@ $this->params['breadcrumbs'] = [
                                 <?php if ($son->level == 3): ?>
                                     <li>
                                         <span><i class="icon-leaf"></i> <?= $son->menuname ?></span> <a href=""></a>
-                                        <a class="icon-edit" href="javascript:;" title="编辑"></a>
-                                        <a class="icon-trash" href="javascript:;"
-                                           onclick="del(<?= $gson->id; ?>,<?= $gson->level ?>)" title="删除"></a>
+                                        <a class="icon-edit" href="<?= Url::to(['sys/menumange','id'=>$son->id]) ?>" title="编辑"></a>
+                                        <a class="icon-trash" href="<?= Url::to(['sys/menudel','id'=>$son->id,'level'=>$son->level]) ?>" data-method="post"  data-confirm="确定删除当前菜单吗？" title="删除"></a>
                                     </li>
                                 <?php else: ?>
                                     <li>
@@ -64,20 +65,15 @@ $this->params['breadcrumbs'] = [
                                         <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>$son->id,'level'=>$son->level]) ?>"  title="添加"></a>
                                         <a class="icon-edit" href="javascript:;"
                                            onclick="add('edit',<?= $son->id; ?> , <?= $son->level ?>)" title="编辑"></a>
-                                        <a class="icon-trash" href="javascript:;"
-                                           onclick="del(<?= $son->id; ?>,<?= $son->level ?>  )" title="删除"></a>
+                                        <a class="icon-trash" href="<?= Url::to(['sys/menudel','id'=>$son->id,'level'=>$son->level]) ?>" data-method="post"  data-confirm="确定删除当前菜单以及所有子菜单吗" title="删除"></a>
                                         <ul>
                                             <!--三级菜单-->
                                             <?php foreach ($son->getSon()->all() as $gson): ?>
                                                 <li>
                                                     <span><i class="icon-leaf"></i> <?= $gson->menuname ?></span> <a
                                                         href=""></a>
-                                                    <a class="icon-edit" href="javascript:;"
-                                                       onclick="add('edit',<?= $gson->id; ?> , <?= $gson->level ?>)"
-                                                       title="编辑"></a>
-                                                    <a class="icon-trash" href="javascript:;"
-                                                       onclick="del(<?= $gson->id; ?>,<?= $gson->level ?>)"
-                                                       title="删除"></a>
+                                                    <a class="icon-edit" href="<?= Url::to(['sys/menumange','id'=>$gson->id]) ?>" title="编辑"></a>
+                                                    <a class="icon-trash" href="<?= Url::to(['sys/menudel','id'=>$gson->id,'level'=>$gson->level]) ?>" data-method="post"  data-confirm="确定删除吗?" title="删除"></a>
                                                 </li>
                                             <?php endforeach; ?>
                                         </ul>
@@ -88,6 +84,7 @@ $this->params['breadcrumbs'] = [
                     </li>
                 <?php endforeach; ?>
             </ul>
+            <?php \yii\widgets\Pjax::end() ?>
         </li>
     </ul>
 

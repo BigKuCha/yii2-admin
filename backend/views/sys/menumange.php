@@ -36,7 +36,7 @@ use yii\helpers\Html;
         ]
     ]) ?>
     <?= Html::activeHiddenInput($model,'parentid') ?>
-
+    <?= Html::hiddenInput('id',$model->id) ?>
     <div class="form-group center">
             <?= Html::submitButton('提交', ['class' => 'btn btn-lg btn-primary']) ?>
     </div>
