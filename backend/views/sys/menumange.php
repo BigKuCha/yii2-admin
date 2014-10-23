@@ -22,12 +22,18 @@ use yii\helpers\Html;
     ]) ?>
 
     <?= $form->field($model,'menuname')->textInput() ?>
-    <?= $form->field($model,'route',['enableAjaxValidation'=>true])->textInput()->hint('一二级菜单也填写，用于权限管理') ?>
-    <?= $form->field($model,'menuicon')->textInput() ?>
+    <?= $form->field($model,'route',['enableAjaxValidation'=>true])->textInput()->hint('三级菜单必须要按照\'controller/action\'格式书写') ?>
+    <?= $form->field($model,'menuicon')->textInput()->hint('参照Bootstrap图标') ?>
     <?= $form->field($model,'level')->dropDownList([
         '1'=>'一级菜单',
         '2'=>'二级菜单',
         '3'=>'三级菜单',
+    ],[
+        'options'=>[
+            '1'=>['disabled'=>($plevel==0)?false:true],
+            '2'=>['disabled'=>($plevel==1)?false:true],
+            '3'=>['disabled'=>($plevel==1 || $plevel==2)?false:true]
+        ]
     ]) ?>
     <?= Html::activeHiddenInput($model,'parentid') ?>
 

@@ -35,7 +35,7 @@ $this->params['breadcrumbs'] = [
     <ul>
         <li>
             <span><i class="icon-leaf"></i> Nevermore</span> <a href=""></a>
-            <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>0]) ?>" title="添加"></a>
+            <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>0,'level'=>0]) ?>" title="添加"></a>
         </li>
         <li>
             <ul>
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'] = [
                 <?php foreach ($list as $father): ?>
                     <li>
                         <span><i class="icon-folder-open"></i> <?= $father->menuname ?></span> <a href=""></a>
-                        <a class="icon-plus" href="" title="添加"></a>
+                        <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>$father->id,'level'=>$father->level]) ?>" title="添加"></a>
                         <a class="icon-edit" href=""  title="编辑"></a>
                         <a class="icon-trash" href="" title="删除"></a>
                         <ul>
@@ -53,8 +53,7 @@ $this->params['breadcrumbs'] = [
                                 <?php if ($son->level == 3): ?>
                                     <li>
                                         <span><i class="icon-leaf"></i> <?= $son->menuname ?></span> <a href=""></a>
-                                        <a class="icon-edit" href="javascript:;"
-                                           onclick="add('edit',<?= $gson->id; ?> , <?= $gson->level ?>)" title="编辑"></a>
+                                        <a class="icon-edit" href="javascript:;" title="编辑"></a>
                                         <a class="icon-trash" href="javascript:;"
                                            onclick="del(<?= $gson->id; ?>,<?= $gson->level ?>)" title="删除"></a>
                                     </li>
@@ -62,8 +61,7 @@ $this->params['breadcrumbs'] = [
                                     <li>
                                         <span><i class="icon-minus-sign"></i> <?= $son->menuname ?></span> <a
                                             href=""></a>
-                                        <a class="icon-plus" href="javascript:;"
-                                           onclick="add('add',<?= $son->id; ?> , <?= $son->level ?>)" title="添加"></a>
+                                        <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>$son->id,'level'=>$son->level]) ?>"  title="添加"></a>
                                         <a class="icon-edit" href="javascript:;"
                                            onclick="add('edit',<?= $son->id; ?> , <?= $son->level ?>)" title="编辑"></a>
                                         <a class="icon-trash" href="javascript:;"

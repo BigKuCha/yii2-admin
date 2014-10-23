@@ -8,6 +8,7 @@
 
 namespace backend\controllers;
 
+use common\components\MyHelper;
 use kartik\widgets\ActiveForm;
 use Yii;
 use backend\models\TMenu;
@@ -32,22 +33,27 @@ class SysController extends BackendController
     public function actionMenumange()
     {
         $params = Yii::$app->request->get();
-        if($params['id'])
-            $model = TMenu::findOne($params['id']);
+        if($id = $_REQUEST['id'])
+            $model = TMenu::findOne($id);
         else
         {
             $model = new TMenu();
+            $model->loadDefaultValues();
             $model->parentid = $params['pid'];
-            if($params['level']==0)
-                $model->level = 1;
-            if($params['level'==2])
-                $model->level = 3;
-
-
+            $model->level = $params['level']+1;
         }
-
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->save())
+            {
+                Yii::$app->session->setFlash('success');
+                return $this->redirect(['sys/menu']);
+            }
+        }
         return $this->render('menumange',[
             'model'=>$model,
+            'plevel'=>$params['level']
         ]);
     }
 
