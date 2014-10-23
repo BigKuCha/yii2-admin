@@ -34,8 +34,8 @@ Modal::begin([
 ]);
 $form = ActiveForm::begin([
     'id'=>'userform',
-    'action'=>'adduser',
-    'validationUrl'=>'ajaxvalidate',
+    'action'=>'/user/adduser',
+    'validationUrl'=>'/user/ajaxvalidate',
 ])
 ?>
 

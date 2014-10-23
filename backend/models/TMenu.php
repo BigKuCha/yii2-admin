@@ -30,7 +30,8 @@ class TMenu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['menuname'], 'required'],
+            [['menuname','route'], 'required'],
+            ['route','unique'],
             [['parentid', 'level'], 'integer'],
             [['menuname', 'route'], 'string', 'max' => 32],
             [['menuicon'], 'string', 'max' => 16]

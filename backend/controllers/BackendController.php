@@ -21,8 +21,10 @@
 
 namespace backend\controllers;
 
+use backend\models\TMenu;
 use kartik\widgets\ActiveForm;
 use Yii;
+use yii\caching\DbDependency;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -35,8 +37,13 @@ class BackendController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['error'],
                         'allow' => true,
+                    ],
+                    [
+                        'actions'=>['login'],
+                        'allow'=>true,
+                        'roles'=>['?'],
                     ],
                     [
                         'allow' => true,
@@ -81,5 +88,31 @@ class BackendController extends Controller
         Yii::$container->set(ActiveForm::className(),[
             'type'=>ActiveForm::TYPE_HORIZONTAL,
         ]);
+        //获取、缓存菜单
+//        $this->getMenulist();
+        $key = 'menulist-'.Yii::$app->user->id;
+        if(!Yii::$app->cache->get($key))
+        {
+            $_list = $this->getMenulist();
+            $sql = 'select count(*) from t_menu';
+            Yii::$app->cache->set($key,$_list,0,new DbDependency(['sql'=>$sql]));
+
+        }else
+            $_list = Yii::$app->cache->get($key);
+        $this->view->params['menulist'] = $_list;
     }
+
+    public function beforeAction($action)
+    {
+        return true;
+    }
+    public function getMenulist()
+    {
+        $list = TMenu::find()->where('level=1')->all();
+        $menu = $this->renderPartial('@backend/views/home/_menu',[
+           'list'=>$list,
+        ]);
+        return $menu;
+    }
+
 }
