@@ -94,7 +94,7 @@ class BackendController extends Controller
         if(!Yii::$app->cache->get($key))
         {
             $_list = $this->getMenulist();
-            $sql = 'select count(*) from t_menu';
+            $sql = 'select max(updated_at) from auth_item';
             Yii::$app->cache->set($key,$_list,0,new DbDependency(['sql'=>$sql]));
 
         }else
