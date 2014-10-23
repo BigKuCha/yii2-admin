@@ -58,6 +58,7 @@ class TMenu extends \yii\db\ActiveRecord
         parent::afterSave($insert, $changedAttributes);
         $auth = Yii::$app->authManager;
         $permission = $auth->createPermission($this->route);
+        $permission->description = $this->menuname;
         $auth->add($permission);
     }
 
