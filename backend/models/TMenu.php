@@ -53,6 +53,19 @@ class TMenu extends \yii\db\ActiveRecord
         ];
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        $auth = Yii::$app->authManager;
+        $permission = $auth->createPermission($this->route);
+        $auth->add($permission);
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        Yii::$app->authManager->remove(Yii::$app->authManager->getPermission($this->route));
+    }
     /**
      * 获取子菜单
      * @return static
