@@ -34,7 +34,7 @@ $this->params['breadcrumbs'] = [
 <div class="tree">
     <ul>
         <li>
-            <span><i class="icon-leaf"></i> Nevermore</span> <a href=""></a>
+            <span><i class="icon-leaf"></i> <?= Yii::$app->params['webname'] ?></span> <a href=""></a>
             <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>0,'level'=>0]) ?>" title="添加"></a>
         </li>
         <li>
