@@ -63,9 +63,33 @@ class SysController extends BackendController
     {
         $id = Yii::$app->request->get('id');
         $level = Yii::$app->request->get('level');
-
-        //需改为循环删除
+        //一级菜单先删除孙子节点
         if($level==1)
+        {
+            $son = TMenu::find()->where(['parentid'=>$id,'level'=>2])->all();
+            foreach($son as $s)
+            {
+                $gsons = TMenu::find()->where(['parentid'=>$s->id])->all();
+                //删除孙子
+                foreach($gsons as $g)
+                {
+                    echo $g->menuname.'<br>';
+                }
+            }
+        }
+        //一二级菜单删除儿子节点
+        if($level<=2)
+        {
+            $son = TMenu::find()->where(['parentid'=>$id])->all();
+            foreach($son as $s)
+            {
+                echo $s->menuname;
+            }
+        }
+        //删除自身
+        TMenu::findOne($id)->delete();
+        //需改为循环删除
+        /*if($level==1)
         {
             $son = TMenu::find()->where(['parentid'=>$id])->column();
             TMenu::deleteAll(['parentid'=>$son]);//删除孙子
@@ -73,7 +97,7 @@ class SysController extends BackendController
         if($level==2)
             TMenu::deleteAll(['parentid'=>$id]);//删除儿子
         //删除自身
-        TMenu::findOne($id)->delete();
+        TMenu::findOne($id)->delete();*/
         Yii::$app->session->setFlash('success');
         return $this->redirect(['sys/menu']);
     }
@@ -93,5 +117,23 @@ class SysController extends BackendController
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model,'menuname');
         }
+    }
+
+    public function actionTest()
+    {
+        $son = TMenu::find()->where(['parentid'=>13])->all();
+        foreach($son as $v)
+        {
+            $gsons = TMenu::find()->where(['parentid'=>$v->id])->all();
+            //删除孙子
+            foreach($gsons as $g)
+            {
+                echo $g->menuname.'<br>';
+            }
+            //删除儿子
+            echo $v->menuname.'<br>';
+//            return MyHelper::dump($gsons);
+        }
+//        return MyHelper::dump($son);
     }
 } 

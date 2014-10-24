@@ -77,7 +77,8 @@ class TMenu extends \yii\db\ActiveRecord
         parent::afterDelete();
         //删除所有权限
         $auth = Yii::$app->authManager;
-        $auth->remove($auth->getPermission($this->route));
+        if($p = $auth->getPermission($this->route))
+            $auth->remove($p);
         /*$sql = 'select name from auth_item where name not in (select route from t_menu)';
         $p = Yii::$app->db->createCommand($sql)->query();
         $auth = Yii::$app->authManager;
