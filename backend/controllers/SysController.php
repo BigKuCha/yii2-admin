@@ -65,6 +65,7 @@ class SysController extends BackendController
         $id = Yii::$app->request->get('id');
         $level = Yii::$app->request->get('level');
 
+        //需改为循环删除
         if($level==1)
         {
             $son = TMenu::find()->where(['parentid'=>$id])->column();
