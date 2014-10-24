@@ -70,10 +70,9 @@ class SysController extends BackendController
             foreach($son as $s)
             {
                 $gsons = TMenu::find()->where(['parentid'=>$s->id])->all();
-                //删除孙子
                 foreach($gsons as $g)
                 {
-                    echo $g->menuname.'<br>';
+                    $g->delete();
                 }
             }
         }
@@ -83,7 +82,7 @@ class SysController extends BackendController
             $son = TMenu::find()->where(['parentid'=>$id])->all();
             foreach($son as $s)
             {
-                echo $s->menuname;
+                $s->delete();
             }
         }
         //删除自身
