@@ -78,23 +78,6 @@ class SysController extends BackendController
         Yii::$app->session->setFlash('success');
         return $this->redirect(['sys/menu']);
     }
-
-    public function actionTest()
-    {
-        $model = new TAdmUser();
-        $data = [
-            ['username'=>'joe','password'=>'aaaaa','password_repeat'=>'aaaaa'],
-            ['username'=>'afd','password'=>'afddddddd','password_repeat'=>'afddddddd'],
-            ['username'=>'ffff','password'=>'afefefefeaaaa','password_repeat'=>'afddddddd'],
-        ];
-        foreach($data as $attributes)
-        {
-            $model->isNewRecord = true;
-            $model->setAttributes($attributes);
-            print_r($model->attributes);
-//            $model->save() && $model->id=1000;
-        }
-    }
     /**
      * Ajax 验证菜单名称
      * @return array
