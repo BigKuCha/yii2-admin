@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "t_menu".
@@ -64,10 +65,11 @@ class TMenu extends \yii\db\ActiveRecord
             $auth->add($permission);
         }else
         {
-            $permission = $auth->getPermission($changedAttributes['route']);
+            $route = ArrayHelper::getValue($changedAttributes,'route',$this->route);
+            $permission = $auth->getPermission($route);
             $permission->name = $this->route;
             $permission->description = $this->menuname;
-            $auth->update($changedAttributes['route'],$permission);
+            $auth->update($route,$permission);
         }
 
     }
@@ -79,13 +81,6 @@ class TMenu extends \yii\db\ActiveRecord
         $auth = Yii::$app->authManager;
         if($p = $auth->getPermission($this->route))
             $auth->remove($p);
-        /*$sql = 'select name from auth_item where name not in (select route from t_menu)';
-        $p = Yii::$app->db->createCommand($sql)->query();
-        $auth = Yii::$app->authManager;
-        foreach($p as $name)
-        {
-            $auth->remove($auth->getPermission($name));
-        }*/
     }
     /**
      * 获取子菜单

@@ -185,46 +185,7 @@ AppAsset::register($this);
         </div>
     </div>
     <!-- #sidebar-shortcuts -->
-    <ul class="nav nav-list">
-        <li>
-            <a href="#" class="dropdown-toggle">
-                <i class="icon-desktop"></i>
-                <span class="menu-text"> 设置 </span>
-
-                <b class="arrow icon-angle-down"></b>
-            </a>
-
-            <ul class="submenu">
-                <li>
-                    <a href="elements.html">
-                        <i class="icon-double-angle-right"></i>
-                        组件
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="dropdown-toggle">
-                        <i class="icon-double-angle-right"></i>
-                        系统设置
-                        <b class="arrow icon-angle-down"></b>
-                    </a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="/sys/menu">
-                                <i class="icon-leaf"></i>
-                                菜单管理
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/user">
-                                <i class="icon-leaf"></i>
-                                用户管理
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <?= $this->params['menulist'] ?>
     <!-- /.nav-list -->
     <div class="sidebar-collapse" id="sidebar-collapse">
         <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"

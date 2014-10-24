@@ -24,7 +24,7 @@
     <?php foreach($list as $father): ?>
     <li>
         <a href="#" class="dropdown-toggle">
-            <i class="icon-desktop"></i>
+            <i class="<?= $father->menuicon ?>"></i>
             <span class="menu-text"> <?= $father->menuname ?> </span>
 
             <b class="arrow icon-angle-down"></b>
@@ -49,7 +49,7 @@
                             <?php foreach($son->getSon()->all() as $gson): ?>
                             <li>
                                 <a href="/<?= $gson->route ?>">
-                                    <i class="icon-leaf"></i>
+                                    <i class="<?= $gson->menuicon ?>"></i>
                                     <?= $gson->menuname ?>
                                 </a>
                             </li>

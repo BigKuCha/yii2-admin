@@ -54,7 +54,7 @@ $this->params['breadcrumbs'] = [
                                 <!--一级菜单下的3级菜单-->
                                 <?php if ($son->level == 3): ?>
                                     <li>
-                                        <span><i class="icon-leaf"></i> <?= $son->menuname ?></span> <a href=""></a>
+                                        <span><i class="<?= $son->menuicon ?>"></i> <?= $son->menuname ?></span> <a href=""></a>
                                         <a class="icon-edit" href="<?= Url::to(['sys/menumange','id'=>$son->id]) ?>" title="编辑"></a>
                                         <a class="icon-trash" href="<?= Url::to(['sys/menudel','id'=>$son->id,'level'=>$son->level]) ?>" data-method="post"  data-confirm="确定删除当前菜单吗？" title="删除"></a>
                                     </li>
@@ -70,7 +70,7 @@ $this->params['breadcrumbs'] = [
                                             <!--三级菜单-->
                                             <?php foreach ($son->getSon()->all() as $gson): ?>
                                                 <li>
-                                                    <span><i class="icon-leaf"></i> <?= $gson->menuname ?></span> <a
+                                                    <span><i class="<?= $gson->menuicon ?>"></i> <?= $gson->menuname ?></span> <a
                                                         href=""></a>
                                                     <a class="icon-edit" href="<?= Url::to(['sys/menumange','id'=>$gson->id]) ?>" title="编辑"></a>
                                                     <a class="icon-trash" href="<?= Url::to(['sys/menudel','id'=>$gson->id,'level'=>$gson->level]) ?>" data-method="post"  data-confirm="确定删除吗?" title="删除"></a>
