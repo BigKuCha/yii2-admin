@@ -13,7 +13,6 @@ use common\components\MyHelper;
 use kartik\widgets\ActiveForm;
 use Yii;
 use backend\models\TMenu;
-use yii\db\Query;
 use yii\web\Response;
 
 class SysController extends BackendController

@@ -11,7 +11,7 @@
  *	┗━┓　　　┏━┛
  *	    ┃　　　┃   神兽保佑
  *	    ┃　　　┃   代码无BUG！
- *	 	 ┃　　　┗━━━┓
+ *	 	┃　　 ┗━━━┓
  *	    ┃　　　　　　　┣┓
  *	    ┃　　　　　　　┏┛
  *	    ┗┓┓┏━┳┓┏┛
@@ -37,6 +37,10 @@ class BackendController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
                         'actions' => ['error'],
                         'allow' => true,
                     ],
@@ -44,10 +48,6 @@ class BackendController extends Controller
                         'actions'=>['login'],
                         'allow'=>true,
                         'roles'=>['?'],
-                    ],
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
                     ],
                 ],
                 'denyCallback'=>function($rules, $action)
@@ -104,6 +104,7 @@ class BackendController extends Controller
 
     public function beforeAction($action)
     {
+        parent::beforeAction($action);
         $route = Yii::$app->requestedRoute;
         if(!Yii::$app->authManager->getPermission($route))
             return true;

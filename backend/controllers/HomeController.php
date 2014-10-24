@@ -22,9 +22,6 @@
 namespace backend\controllers;
 
 
-use common\components\MyHelper;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 class HomeController extends BackendController
 {
 
