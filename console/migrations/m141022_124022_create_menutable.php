@@ -17,7 +17,7 @@ class m141022_124022_create_menutable extends Migration
             'id' => Schema::TYPE_PK,
             'menuname' => Schema::TYPE_STRING . '(32) NOT NULL',
             'parentid'=> Schema::TYPE_SMALLINT .' NOT NULL DEFAULT 0',
-            'route' => Schema::TYPE_STRING . '(32)  NULL',
+            'route' => Schema::TYPE_STRING . '(32) NOT NULL',
             'menuicon' => Schema::TYPE_STRING . '(16) NOT  NULL DEFAULT "icon-book"',
 
             'level' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 1',
