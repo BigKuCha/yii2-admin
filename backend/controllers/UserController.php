@@ -57,7 +57,6 @@ class UserController extends BackendController
             $model->rememberMe = $_POST['rememberMe']?:false;
             if($model->login())
                 return $this->goHome();
-//                return MyHelper::dump(Yii::$app->user->identity);
         }
         $this->layout = 'main-login';
         return $this->render('login',[
