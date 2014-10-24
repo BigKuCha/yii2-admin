@@ -8,6 +8,7 @@
 
 namespace backend\controllers;
 
+use backend\models\TAdmUser;
 use common\components\MyHelper;
 use kartik\widgets\ActiveForm;
 use Yii;
@@ -33,7 +34,6 @@ class SysController extends BackendController
      */
     public function actionMenumange()
     {
-        $this->defaultAction;
         $params = Yii::$app->request->get();
         if($id = $_REQUEST['id'])
             $model = TMenu::findOne($id);
@@ -70,7 +70,6 @@ class SysController extends BackendController
         {
             $son = TMenu::find()->where(['parentid'=>$id])->column();
             TMenu::deleteAll(['parentid'=>$son]);//删除孙子
-            TMenu::deleteAll(['parentid'=>$id]);//删除儿子
         }
         if($level==2)
             TMenu::deleteAll(['parentid'=>$id]);//删除儿子
@@ -82,16 +81,19 @@ class SysController extends BackendController
 
     public function actionTest()
     {
-        $sql = "select name from auth_item where name not in (select route from t_menu)";
-        $x = Yii::$app->db->createCommand($sql)->queryAll();
-        foreach($x as $v )
+        $model = new TAdmUser();
+        $data = [
+            ['username'=>'joe','password'=>'aaaaa','password_repeat'=>'aaaaa'],
+            ['username'=>'afd','password'=>'afddddddd','password_repeat'=>'afddddddd'],
+            ['username'=>'ffff','password'=>'afefefefeaaaa','password_repeat'=>'afddddddd'],
+        ];
+        foreach($data as $attributes)
         {
-            Yii::$app->authManager->remove(Yii::$app->authManager->getPermission($v));
+            $model->isNewRecord = true;
+            $model->setAttributes($attributes);
+            print_r($model->attributes);
+//            $model->save() && $model->id=1000;
         }
-        return MyHelper::dump($x);
-        $x = TMenu::find()->where(['parentid'=>1,'level'=>2])->column();
-        $x = TMenu::find()->where(['parentid'=>$x])->all();
-        return MyHelper::dump($x);
     }
     /**
      * Ajax 验证菜单名称
