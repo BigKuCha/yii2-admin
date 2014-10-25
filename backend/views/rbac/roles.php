@@ -38,11 +38,11 @@ $this->params['breadcrumbs'] = [
             'buttons'=>[
                 'update'=>function($url, $model, $key)
                 {
-                    return Html::a('',$url,['class'=>'glyphicon glyphicon-pencil']);
+                    return Html::a('','/rbac/roleupdate?id='.$key,['class'=>'glyphicon glyphicon-pencil','title'=>'更新']);
                 },
-                'delete1'=>function($url,$model,$key)
+                'delete'=>function($url,$model,$key)
                 {
-                    return \yii\helpers\Html::a('afe');
+                    return Html::a('','/rbac/roledelete?id'.$key,['class'=>'glyphicon glyphicon-trash','title'=>'删除']);
                 }
             ]
         ]
