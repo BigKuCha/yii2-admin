@@ -120,19 +120,10 @@ class SysController extends BackendController
 
     public function actionTest()
     {
-        $son = TMenu::find()->where(['parentid'=>13])->all();
-        foreach($son as $v)
-        {
-            $gsons = TMenu::find()->where(['parentid'=>$v->id])->all();
-            //删除孙子
-            foreach($gsons as $g)
-            {
-                echo $g->menuname.'<br>';
-            }
-            //删除儿子
-            echo $v->menuname.'<br>';
-//            return MyHelper::dump($gsons);
-        }
-//        return MyHelper::dump($son);
+        $role = Yii::$app->authManager->createRole('admin');
+        $role->description = '系统管理员';
+        Yii::$app->authManager->add($role);
+        $roles = Yii::$app->authManager->getRoles();
+        return MyHelper::dump($roles);
     }
 } 
