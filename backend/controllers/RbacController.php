@@ -36,4 +36,11 @@ class RbacController extends BackendController
             'dataprovider'=>$dataprovider,
         ]);
     }
+
+    public function actionAddrole()
+    {
+        return $this->render('addrole',[
+
+        ]);
+    }
 }

@@ -24,6 +24,11 @@ $this->params['breadcrumbs'] = [
     '角色管理',
 ];
 ?>
+<p>
+    <?= Html::a('添加角色',['rbac/addrole'],['class'=>'btn btn-sm btn btn-success']) ?>
+</p>
+
+
 <?= GridView::widget([
     'dataProvider'=>$dataprovider,
     'columns'=>[
