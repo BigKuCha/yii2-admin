@@ -11,7 +11,11 @@ return [
     'language'=>'zh-CN',
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+        ]
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'backend\models\TAdmUser',
