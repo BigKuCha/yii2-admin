@@ -87,5 +87,4 @@ $this->params['breadcrumbs'] = [
             <?php \yii\widgets\Pjax::end() ?>
         </li>
     </ul>
-
 </div>
