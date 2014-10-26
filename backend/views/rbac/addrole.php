@@ -24,5 +24,4 @@ use yii\helpers\Html;
 <?php Html::beginForm([
 
 ]) ?>
-<?= Html::input('') ?>
 <?php Html::endForm() ?>
