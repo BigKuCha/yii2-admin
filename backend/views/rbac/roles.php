@@ -11,7 +11,7 @@
  *	┗━┓　　　┏━┛
  *	    ┃　　　┃   神兽保佑
  *	    ┃　　　┃   代码无BUG！
- *	 	 ┃　　　┗━━━┓
+ *	 	┃　　　┗━━━┓
  *	    ┃　　　　　　　┣┓
  *	    ┃　　　　　　　┏┛
  *	    ┗┓┓┏━┳┓┏┛
@@ -27,7 +27,6 @@ $this->params['breadcrumbs'] = [
 <p>
     <?= Html::a('添加角色',['rbac/addrole'],['class'=>'btn btn-sm btn btn-success']) ?>
 </p>
-
 
 <?= GridView::widget([
     'dataProvider'=>$dataprovider,
