@@ -20,6 +20,7 @@
  */
 namespace backend\controllers;
 header("Content-type:text/html;charset=utf-8");
+use backend\models\TMenu;
 use Yii;
 use common\components\MyHelper;
 use yii\data\ArrayDataProvider;
@@ -41,6 +42,14 @@ class RbacController extends BackendController
     {
         return $this->render('addrole',[
 
+        ]);
+    }
+
+    public function actionAssignauth()
+    {
+        $list = TMenu::find()->where('level=1')->all();
+        return $this->render('assignauth',[
+            'list'=>$list,
         ]);
     }
 }

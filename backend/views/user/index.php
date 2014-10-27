@@ -57,6 +57,9 @@ Modal::end();
     'dataProvider'=>$dataprovider,
     'columns'=>[
         [
+            'class'=>'yii\grid\CheckboxColumn',
+        ],
+        [
             'header'=>'编号',
             'class' => SerialColumn::className()
         ],
