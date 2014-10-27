@@ -44,7 +44,7 @@ $this->params['breadcrumbs'] = [
             'buttons'=>[
                 'view'=>function($url,$model,$key)
                 {
-                    return MyHelper::actionbutton($url,'view',['title'=>'分配角色']);
+                    return MyHelper::actionbutton(['rbac/assignauth','rolename'=>$key],'view',['title'=>'分配权限']);
                 },
                 'update'=>function($url, $model, $key)
                 {

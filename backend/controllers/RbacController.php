@@ -45,11 +45,16 @@ class RbacController extends BackendController
         ]);
     }
 
-    public function actionAssignauth()
+    /**
+     * 给角色分配权限
+     * @return string
+     */
+    public function actionAssignauth($rolename)
     {
         $list = TMenu::find()->where('level=1')->all();
         return $this->render('assignauth',[
             'list'=>$list,
+            'rolename'=>$rolename,
         ]);
     }
 }

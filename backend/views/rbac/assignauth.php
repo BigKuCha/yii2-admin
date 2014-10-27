@@ -9,6 +9,10 @@ $auth = Yii::$app->authManager;
 $user = Yii::$app->user;
 
 $this->params['breadcrumbs'] = [
+    [
+        'label'=>'角色管理',
+        'url'=>'/rbac/roles',
+    ],
     '角色授权'
 ];
 ?>
@@ -32,6 +36,22 @@ $this->params['breadcrumbs'] = [
                 <td>
                     <?php foreach ($f->getSon()->all() as $son): ?>
                         <div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
+                            <?php if($son->level==3): ?>
+                                <div class="widget-body">
+                                    <div class="widget-body-inner" style="display: block;">
+                                        <div class="widget-main">
+                                            <input type="checkbox"
+                                                   name="<?= $f['id'] . '_' . $son['id'] ?>"
+                                                   id="<?= $son['id'] ?>"
+                                                <?php if ($user->can($son->route)): ?>
+                                                    checked
+                                                <?php endif; ?>
+                                                   onclick="ckbox(2,this)"/>
+                                            <?= $son['menuname'] ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php else: ?>
                             <div class="widget-box collapsed">
                                 <div class="widget-header widget-header-small">
                                     <h6>
@@ -68,7 +88,9 @@ $this->params['breadcrumbs'] = [
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </td>
@@ -106,7 +128,8 @@ $this->params['breadcrumbs'] = [
             }
         }
         //更新数据
-        var data = 'level=' + level + '&menuid=' + id + '&cntf=' + cntf + '&cntt=' + cntt + '&ck=' + thischecked + '&roleid=' + '<?= $roleid ?>' + '&_csrf=' + '<?= Yii::$app->request->csrfToken ?>';
+        var data = 'level=' + level + '&menuid=' + id + '&cntf=' + cntf + '&cntt=' + cntt + '&ck=' + thischecked + '&rolename=' + '<?= $rolename ?>';
+        console.info(data);
         /*$.ajax({
             url: '/admin/rbac/assignauth',
             type: 'post',
