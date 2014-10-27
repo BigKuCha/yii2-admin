@@ -21,7 +21,9 @@
 
 namespace common\components;
 
-
+use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 class MyHelper
 {
     /**
@@ -149,5 +151,29 @@ class MyHelper
         }
         fclose($fp);
         return $uploadfile;
+    }
+
+    public static function actionbutton($url,$type='update',$options=[])
+    {
+        if ($type=='view') {
+            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ArrayHelper::merge([
+                'title' => Yii::t('yii', 'View'),
+                'data-pjax' => '0',
+            ],$options));
+        }
+        if ($type=='update') {
+            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ArrayHelper::merge([
+                'title' => Yii::t('yii', 'Update'),
+                'data-pjax' => '0',
+            ],$options));
+        }
+        if ($type=='delete') {
+            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ArrayHelper::merge([
+                'title' => Yii::t('yii', 'Delete'),
+                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                'data-method' => 'post',
+                'data-pjax' => '0',
+            ],$options));
+        }
     }
 }

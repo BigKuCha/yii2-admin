@@ -20,6 +20,7 @@
  */
 use yii\grid\GridView;
 use yii\helpers\Html;
+use common\components\MyHelper;
 $this->params['breadcrumbs'] = [
     '角色管理',
 ];
@@ -39,14 +40,19 @@ $this->params['breadcrumbs'] = [
         [
             'class'=>'yii\grid\ActionColumn',
             'header'=>'操作',
+            'template'=>'{view} {update} {delete}',
             'buttons'=>[
+                'view'=>function($url,$model,$key)
+                {
+                    return MyHelper::actionbutton($url,'view',['title'=>'分配角色']);
+                },
                 'update'=>function($url, $model, $key)
                 {
-                    return Html::a('','/rbac/roleupdate?id='.$key,['class'=>'glyphicon glyphicon-pencil','title'=>'更新']);
+                    return MyHelper::actionbutton($url,'update');
                 },
                 'delete'=>function($url,$model,$key)
                 {
-                    return Html::a('','/rbac/roledelete?id'.$key,['class'=>'glyphicon glyphicon-trash','title'=>'删除']);
+                    return MyHelper::actionbutton($url,'delete');
                 }
             ]
         ]
