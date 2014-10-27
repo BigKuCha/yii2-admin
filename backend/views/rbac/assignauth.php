@@ -7,6 +7,10 @@
  */
 $auth = Yii::$app->authManager;
 $user = Yii::$app->user;
+
+$this->params['breadcrumbs'] = [
+    '角色授权'
+];
 ?>
 <div class="table-responsive">
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
