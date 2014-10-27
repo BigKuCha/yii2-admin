@@ -43,12 +43,4 @@ class RbacController extends BackendController
 
         ]);
     }
-
-    public function actionTest()
-    {
-        $auth = Yii::$app->authManager;
-        $role = $auth->createRole('admin');
-        $role->description = '系统管理员';
-        $auth->add($role);
-    }
 }
