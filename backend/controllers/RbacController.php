@@ -48,6 +48,9 @@ class RbacController extends BackendController
 
     public function actionTest()
     {
+        $auth = Yii::$app->authManager;
+        $auth->removeChild($auth->getRole('admin'),$auth->getPermission('conf'));
+        return 1;
         $x = (new Query())->from('t_menu')->all();
         return print_r($x);
         $auth = Yii::$app->authManager;
@@ -69,7 +72,8 @@ class RbacController extends BackendController
             $role = $auth->getRole($posts['rolename']);
             $thismenu =TMenu::findOne($posts['menuid']);
             $route = $thismenu->route;
-            if($posts['ck'])
+            $permission = $auth->getPermission($route);
+            if($posts['ck']=='true')
             {
                 if($posts['level']==3)
                 {
@@ -120,15 +124,48 @@ class RbacController extends BackendController
                     }
                 }
                 //自身加入权限
-                $permission = $auth->getPermission($route);
-                    $auth->addChild($role,$permission);
+                $auth->addChild($role,$permission);
+            }else
+            {
+                if($posts['level']==3 && $posts['cntlv3']==0)
+                {
+                    $father = $thismenu->father;
+                    $auth->removeChild($role,$auth->getPermission($father->route));
+                    if($posts['cntlv3']==0)
+                        $auth->removeChild($role,$auth->getPermission($father->route));
+                    if($posts['cntlv2']==0)
+                        $auth->removeChild($role,$auth->getPermission($father->father->route));
+                }
+                if($posts['level']==2)
+                {
+                    foreach($thismenu->son as $son)
+                    {
+                        $auth->removeChild($role,$auth->getPermission($son->route));
+                    }
+                    if($posts['cntlv2']==0)
+                        $auth->removeChild($role,$auth->getPermission($thismenu->father->route));
+                }
+                if($posts['level']==1)
+                {
+                    foreach($thismenu->son as $son)
+                    {
+                        $auth->removeChild($role,$auth->getPermission($son->route));
+                        foreach($son->son as $gson)
+                        {
+                            $auth->removeChild($role,$auth->getPermission($gson->route));
+                        }
+                    }
+                }
+                //删除自身
+                $auth->removeChild($role,$permission);
             }
-
         }
         $list = TMenu::find()->where('level=1')->all();
+        $rolename = Yii::$app->request->get('rolename');
         return $this->render('assignauth',[
             'list'=>$list,
-            'rolename'=>Yii::$app->request->get('rolename'),
+            'rolename'=>$rolename,
+            'role'=>Yii::$app->authManager->getRole($rolename)
         ]);
     }
 }

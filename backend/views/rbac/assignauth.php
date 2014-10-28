@@ -30,7 +30,7 @@ $this->params['breadcrumbs'] = [
         foreach ($list as $f): ?>
             <tr>
                 <td style="width: 150px;">
-                    <input type="checkbox" <?php if ($user->can($f->route)): ?> checked <?php endif; ?>
+                    <input type="checkbox" <?php if ($auth->hasChild($role,$auth->getPermission($f->route))): ?> checked <?php endif; ?>
                            onclick="ckbox(1,this)" name="<?= $f['id'] ?>" id="<?= $f['id'] ?>"/>
                     &nbsp;<?= $f['menuname'] ?></td>
                 <td>
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'] = [
                                             <input type="checkbox"
                                                    name="<?= $f['id'] . '_' . $son['id'] ?>"
                                                    id="<?= $son['id'] ?>"
-                                                <?php if ($user->can($son->route)): ?>
+                                                <?php if ($auth->hasChild($role,$auth->getPermission($son->route))): ?>
                                                     checked
                                                 <?php endif; ?>
                                                    onclick="ckbox(2,this)"/>
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'] = [
                                         <input type="checkbox"
                                                name="<?= $f['id'] . '_' . $son['id'] ?>"
                                                id="<?= $son['id'] ?>"
-                                            <?php if ($user->can($son->route)): ?>
+                                            <?php if ($auth->hasChild($role,$auth->getPermission($son->route))): ?>
                                                 checked
                                             <?php endif; ?>
                                                onclick="ckbox(2,this)"/>
@@ -79,7 +79,7 @@ $this->params['breadcrumbs'] = [
                                                 <input type="checkbox"
                                                        name="<?= $f['id'] . '_' . $son['id'] . '_' . $gson['id'] ?>"
                                                        id="<?= $gson['id'] ?>"
-                                                    <?php if ($user->can($gson->route)): ?>
+                                                    <?php if ($auth->hasChild($role,$auth->getPermission($gson->route))): ?>
                                                         checked
                                                     <?php endif; ?>
                                                        onclick="ckbox(3,this)"/>&nbsp;
