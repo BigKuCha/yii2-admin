@@ -125,7 +125,7 @@ AppAsset::register($this);
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="user/logout">
+                            <a href="/user/logout">
                                 <i class="icon-off"></i>
                                 退出
                             </a>

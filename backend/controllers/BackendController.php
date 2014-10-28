@@ -52,6 +52,7 @@ class BackendController extends Controller
                 ],
                 'denyCallback'=>function($rules, $action)
                 {
+                    Yii::$app->user->returnUrl = Yii::$app->request->url;
                     return $this->redirect(['user/login']);
                 },
             ],

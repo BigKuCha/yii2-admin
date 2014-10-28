@@ -110,7 +110,7 @@ $this->params['breadcrumbs'] = [
         //取消选中时判断父节点
         var arr = name.split('_');
         if (level == 3) {
-            //如果4级菜单全都没选中，对应的3级菜单也取消选中
+            //如果3级菜单全都没选中，对应的2级菜单也取消选中
             var cntf = $('input[name*=' + arr[0] + '_' + arr[1] + '_]:checked').size();
             if (cntf > 0) {
                 $('input[name=' + arr[0] + '_' + arr[1] + ']').prop('checked', true);
@@ -119,7 +119,7 @@ $this->params['breadcrumbs'] = [
             }
         }
         if (level >= 2) {
-            //如果3级菜单都没选中 2级菜单也取消选中
+            //如果2级菜单都没选中 1级菜单也取消选中
             var cntt = $('input[name*=' + arr[0] + '_' + ']:checked').size();
             if (cntt > 0) {
                 $('#' + arr[0]).prop('checked', true);

@@ -56,7 +56,7 @@ class UserController extends BackendController
             $model = new LoginForm($_POST);
             $model->rememberMe = $_POST['rememberMe']?:false;
             if($model->login())
-                return $this->goHome();
+                return $this->goBack('/');
         }
         $this->layout = 'main-login';
         return $this->render('login',[
