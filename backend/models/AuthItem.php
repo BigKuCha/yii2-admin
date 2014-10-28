@@ -36,6 +36,7 @@ class AuthItem extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'type'], 'required'],
+            ['name','unique'],
             [['type', 'created_at', 'updated_at'], 'integer'],
             [['description', 'data'], 'string'],
             [['name', 'rule_name'], 'string', 'max' => 64]
@@ -48,13 +49,13 @@ class AuthItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
-            'type' => 'Type',
-            'description' => 'Description',
-            'rule_name' => 'Rule Name',
-            'data' => 'Data',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => '名称',
+            'type' => '类型',
+            'description' => '描述',
+            'rule_name' => '规则名称',
+            'data' => '数据',
+            'created_at' => '创建时间',
+            'updated_at' => '修改时间',
         ];
     }
 

@@ -20,11 +20,16 @@
  */
 namespace backend\controllers;
 header("Content-type:text/html;charset=utf-8");
+use backend\models\AuthItem;
 use backend\models\TMenu;
 use Yii;
 use common\components\MyHelper;
 use yii\data\ArrayDataProvider;
 use yii\db\Query;
+use yii\helpers\Html;
+use yii\rbac\Item;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class RbacController extends BackendController
 {
@@ -49,9 +54,47 @@ class RbacController extends BackendController
      */
     public function actionAddrole()
     {
+        if($rolename = $_REQUEST['id'])
+            $model = AuthItem::findOne($rolename);
+        else
+            $model = new AuthItem();
+        if(Yii::$app->request->isPost)
+        {
+            $auth = Yii::$app->authManager;
+            $model->load(Yii::$app->request->post());
+            $role = $auth->createRole($model->name);
+            $role->description = $model->description;
+            if($auth->add($role))
+            {
+                Yii::$app->session->setFlash('success');
+                return $this->redirect(['rbac/roles']);
+            }
+        }
+        return $this->render('addrole',[
+            'model'=>$model,
+        ]);
+    }
+
+    public function actionEditrole($rolename)
+    {
+        $model = AuthItem::findOne($rolename);
         return $this->render('addrole',[
 
         ]);
+    }
+
+    public function actionValidateitemname()
+    {
+        if($name = $_REQUEST['id'])
+            $model = AuthItem::findOne($name);
+        else
+            $model = new AuthItem();
+        if(Yii::$app->request->isAjax)
+        {
+            $model->load(Yii::$app->request->post());
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
     }
     /**
      * 给角色分配权限
