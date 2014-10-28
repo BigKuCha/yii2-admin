@@ -67,7 +67,14 @@ Modal::end();
         'password',
         [
             'header'=>'操作',
-            'class'=>'yii\grid\ActionColumn'
+            'class'=>'yii\grid\ActionColumn',
+            'template' => '{view} {update} {delete}',
+            'buttons'=>[
+                'view'=>function($url,$model,$key)
+                {
+                    return \common\components\MyHelper::actionbutton('/rbac/assignrole?id='.$key,'view',['title'=>'查看/添加角色']);
+                },
+            ]
         ],
     ],
 ]) ?>

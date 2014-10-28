@@ -22,8 +22,10 @@ namespace backend\controllers;
 header("Content-type:text/html;charset=utf-8");
 use backend\models\AuthItem;
 use backend\models\TMenu;
+use common\components\MyHelper;
 use Yii;
 use yii\data\ArrayDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -214,6 +216,29 @@ class RbacController extends BackendController
         ]);
     }
 
+    public function actionTest()
+    {
+        $auth = Yii::$app->authManager;
+        $role = $auth->getRole('admin');
+        $auth->assign($role,1);
+    }
+    /**
+     * 给用户分配角色
+     * @param $id
+     * @return string
+     */
+    public function actionAssignrole($id)
+    {
+        $auth = Yii::$app->authManager;
+        //获取已有角色
+        $assignedroles = ArrayHelper::map($auth->getRolesByUser($id),'name','name');
+        //获取所有角色
+        $roles = ArrayHelper::map($auth->getRoles(),'name','name');
+        return $this->render('assignrole',[
+            'roles'=>$roles,
+            'assignedroles'=>$assignedroles
+        ]);
+    }
     /**
      * 添加权限
      * @param $role
