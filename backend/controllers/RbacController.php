@@ -28,6 +28,10 @@ use yii\db\Query;
 
 class RbacController extends BackendController
 {
+    /**
+     * 角色列表
+     * @return string
+     */
     public function actionRoles()
     {
         $roles = Yii::$app->authManager->getRoles();
@@ -39,25 +43,15 @@ class RbacController extends BackendController
         ]);
     }
 
+    /**
+     * 添加角色
+     * @return string
+     */
     public function actionAddrole()
     {
         return $this->render('addrole',[
 
         ]);
-    }
-
-    public function actionTest()
-    {
-        $auth = Yii::$app->authManager;
-        $auth->removeChild($auth->getRole('admin'),$auth->getPermission('conf'));
-        return 1;
-        $x = (new Query())->from('t_menu')->all();
-        return print_r($x);
-        $auth = Yii::$app->authManager;
-        $role = $auth->getRole('admin');
-        $per = $auth->getPermission('test');
-        $auth->addChild($role,$per);
-        print_r($role);exit;
     }
     /**
      * 给角色分配权限
