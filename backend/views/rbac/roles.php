@@ -26,13 +26,16 @@ $this->params['breadcrumbs'] = [
 ];
 ?>
 <p>
-    <?= Html::a('添加角色',['rbac/addrole'],['class'=>'btn btn-sm btn btn-success']) ?>
+    <?= Html::a('添加角色','managerole',['class'=>'btn btn-sm btn btn-success']) ?>
 </p>
 
 <?= GridView::widget([
     'dataProvider'=>$dataprovider,
     'columns'=>[
-        'type:text:类型',
+        [
+            'class'=>'yii\grid\SerialColumn',
+            'header'=>'编号'
+        ],
         'name:text:名称',
         'description:text:描述',
         'ruleName:text:规则名称',
@@ -48,11 +51,11 @@ $this->params['breadcrumbs'] = [
                 },
                 'update'=>function($url, $model, $key)
                 {
-                    return MyHelper::actionbutton($url,'update');
+                    return MyHelper::actionbutton('managerole?id='.$key,'update');
                 },
                 'delete'=>function($url,$model,$key)
                 {
-                    return MyHelper::actionbutton($url,'delete');
+                    return MyHelper::actionbutton('/rbac/deleterole?id='.$key,'delete');
                 }
             ]
         ]

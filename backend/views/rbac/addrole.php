@@ -20,6 +20,13 @@
  */
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
+$this->params['breadcrumbs'] = [
+    [
+        'label'=>'角色管理',
+        'url'=>'/rbac/roles',
+    ],
+    ($model->isNewRecord)?'添加角色':'修改角色('.$model->name.')'
+];
 ?>
 
 <div class="col-lg-6">

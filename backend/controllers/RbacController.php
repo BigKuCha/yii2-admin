@@ -49,10 +49,10 @@ class RbacController extends BackendController
     }
 
     /**
-     * 添加角色
+     * 添加/修改角色
      * @return string
      */
-    public function actionAddrole()
+    public function actionManagerole()
     {
         if($rolename = $_REQUEST['id'])
             $model = AuthItem::findOne($rolename);
@@ -62,9 +62,20 @@ class RbacController extends BackendController
         {
             $auth = Yii::$app->authManager;
             $model->load(Yii::$app->request->post());
-            $role = $auth->createRole($model->name);
-            $role->description = $model->description;
-            if($auth->add($role))
+            if($model->isNewRecord)
+            {
+                $role = $auth->createRole($model->name);
+                $role->description = $model->description;
+                $rzt = $auth->add($role);
+            }else
+            {
+                $name = $model->oldAttributes['name'];
+                $role = $auth->getRole($name);
+                $role->name = $model->name;
+                $role->description = $model->description;
+                $rzt = $auth->update($name,$role);
+            }
+            if($rzt)
             {
                 Yii::$app->session->setFlash('success');
                 return $this->redirect(['rbac/roles']);
@@ -75,12 +86,14 @@ class RbacController extends BackendController
         ]);
     }
 
-    public function actionEditrole($rolename)
+    public function actionDeleterole($id)
     {
-        $model = AuthItem::findOne($rolename);
-        return $this->render('addrole',[
-
-        ]);
+        $role = Yii::$app->authManager->getRole($id);
+        if(Yii::$app->authManager->remove($role))
+            Yii::$app->session->setFlash('success');
+        else
+            Yii::$app->session->setFlash('fail','角色删除失败');
+        return $this->redirect(['rbac/roles']);
     }
 
     public function actionValidateitemname()
