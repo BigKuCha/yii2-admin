@@ -90,12 +90,11 @@ class BackendController extends Controller
             'type'=>ActiveForm::TYPE_HORIZONTAL,
         ]);
         //获取、缓存菜单
-//        $this->getMenulist();
         $key = 'menulist-'.Yii::$app->user->id;
         if(!Yii::$app->cache->get($key))
         {
             $_list = $this->getMenulist();
-            $sql = 'select max(updated_at) from auth_item';
+            $sql = 'select max(updated_at),count(name) from auth_item';
             Yii::$app->cache->set($key,$_list,0,new DbDependency(['sql'=>$sql]));
 
         }else
