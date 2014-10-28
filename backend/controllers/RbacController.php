@@ -80,26 +80,20 @@ class RbacController extends BackendController
                     //2级菜单
                     $father = $thismenu->father;
                     $fpermission = $auth->getPermission($father->route);
-                    if(!$auth->hasChild($role,$fpermission))
-                        $auth->addChild($role,$fpermission);
+                    $this->addChild($role,$fpermission);
                     //1级菜单
-                    $gpermission = $auth->getPermission($father->father->route);
-                    if(!$auth->hasChild($role,$gpermission))
-                        $auth->addChild($role,$gpermission);
+                    $this->addChild($role,$auth->getPermission($father->father->route));
                 }
                 if($posts['level']==2)
                 {
                     //1级菜单
                     $fpermission = $auth->getPermission($thismenu->father->route);
-                    if(!$auth->hasChild($role,$fpermission))
-                        $auth->addChild($role,$fpermission);
+                    $this->addChild($role,$fpermission);
                     //3级菜单
                     $children = $thismenu->son;
                     foreach($children as $son)
                     {
-                        $sonpermission = $auth->getPermission($son->route);
-                        if(!$auth->hasChild($role,$sonpermission))
-                            $auth->addChild($role,$sonpermission);
+                        $this->addChild($role,$auth->getPermission($son->route));
                     }
                 }
                 if($posts['level']==1)
@@ -108,17 +102,13 @@ class RbacController extends BackendController
                     $sons = $thismenu->son;
                     foreach($sons as $son)
                     {
-                        $sonpermission = $auth->getPermission($son->route);
-                        if(!$auth->hasChild($role,$sonpermission))
-                            $auth->addChild($role,$sonpermission);
+                        $this->addChild($role,$auth->getPermission($son->route));
                         if($son->level==2)
                         {
                             $gsons = $son->son;
                             foreach($gsons as $gson)
                             {
-                                $gsonpermission = $auth->getPermission($gson->route);
-                                if(!$auth->hasChild($role,$gsonpermission))
-                                    $auth->addChild($role,$gsonpermission);
+                                $this->addChild($role,$auth->getPermission($gson->route));
                             }
                         }
                     }
@@ -167,5 +157,17 @@ class RbacController extends BackendController
             'rolename'=>$rolename,
             'role'=>Yii::$app->authManager->getRole($rolename)
         ]);
+    }
+
+    /**
+     * 添加权限
+     * @param $role
+     * @param $item
+     */
+    protected function addChild($role,$item)
+    {
+        $auth = Yii::$app->authManager;
+        if(!$auth->hasChild($role,$item))
+            $auth->addChild($role,$item);
     }
 }
