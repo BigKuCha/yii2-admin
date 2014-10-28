@@ -43,7 +43,7 @@ $this->params['breadcrumbs'] = [
                 <!--一级菜单-->
                 <?php foreach ($list as $father): ?>
                     <li>
-                        <span><i class="icon-folder-open"></i> <?= $father->menuname ?></span> <a href=""></a>
+                        <span><i class="<?= $father->menuicon ?>"></i> <?= $father->menuname ?></span> <a href=""></a>
                         <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>$father->id,'level'=>$father->level]) ?>" title="添加"></a>
                         <a class="icon-edit" href="<?= Url::to(['sys/menumange','id'=>$father->id]) ?>"  title="编辑"></a>
                         <a class="icon-trash" href="<?= Url::to(['sys/menudel','id'=>$father->id,'level'=>$father->level]) ?>" data-method="post"  data-confirm="确定要删除当前菜单以及所有子菜单吗?" title="删除"></a>
