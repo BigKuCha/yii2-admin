@@ -23,11 +23,7 @@ header("Content-type:text/html;charset=utf-8");
 use backend\models\AuthItem;
 use backend\models\TMenu;
 use Yii;
-use common\components\MyHelper;
 use yii\data\ArrayDataProvider;
-use yii\db\Query;
-use yii\helpers\Html;
-use yii\rbac\Item;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -86,6 +82,11 @@ class RbacController extends BackendController
         ]);
     }
 
+    /**
+     * 删除角色
+     * @param $id
+     * @return Response
+     */
     public function actionDeleterole($id)
     {
         $role = Yii::$app->authManager->getRole($id);
@@ -96,6 +97,10 @@ class RbacController extends BackendController
         return $this->redirect(['rbac/roles']);
     }
 
+    /**
+     * ajax验证角色是否存在
+     * @return array
+     */
     public function actionValidateitemname()
     {
         if($name = $_REQUEST['id'])
