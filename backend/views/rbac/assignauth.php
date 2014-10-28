@@ -111,8 +111,8 @@ $this->params['breadcrumbs'] = [
         var arr = name.split('_');
         if (level == 3) {
             //如果3级菜单全都没选中，对应的2级菜单也取消选中
-            var cntf = $('input[name*=' + arr[0] + '_' + arr[1] + '_]:checked').size();
-            if (cntf > 0) {
+            var cntlv3 = $('input[name*=' + arr[0] + '_' + arr[1] + '_]:checked').size();
+            if (cntlv3 > 0) {
                 $('input[name=' + arr[0] + '_' + arr[1] + ']').prop('checked', true);
             } else {
                 $('input[name=' + arr[0] + '_' + arr[1] + ']').prop('checked', false);
@@ -120,16 +120,17 @@ $this->params['breadcrumbs'] = [
         }
         if (level >= 2) {
             //如果2级菜单都没选中 1级菜单也取消选中
-            var cntt = $('input[name*=' + arr[0] + '_' + ']:checked').size();
-            if (cntt > 0) {
+            var cntlv2 = $('input[name*=' + arr[0] + '_' + ']:checked').size();
+            if (cntlv2 > 0) {
                 $('#' + arr[0]).prop('checked', true);
             } else {
                 $('#' + arr[0]).prop('checked', false);
             }
         }
         //更新数据
-        var data = 'level=' + level + '&menuid=' + id + '&cntf=' + cntf + '&cntt=' + cntt + '&ck=' + thischecked + '&rolename=' + '<?= $rolename ?>';
+        var data = 'level=' + level + '&menuid=' + id + '&cntlv3=' + cntlv3 + '&cntlv2=' + cntlv2 + '&ck=' + thischecked + '&rolename=' + '<?= $rolename ?>';
         console.info(data);
+        $.post('/rbac/assignauth',data);
         /*$.ajax({
             url: '/admin/rbac/assignauth',
             type: 'post',

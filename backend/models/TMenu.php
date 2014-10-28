@@ -90,4 +90,11 @@ class TMenu extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TMenu::className(),['parentid'=>'id'])->orderBy('level desc');
     }
+    /**
+     * 获取父菜单
+     */
+    public function getFather()
+    {
+        return $this->hasOne(TMenu::className(),['id'=>'parentid']);
+    }
 }
