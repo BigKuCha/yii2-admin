@@ -91,7 +91,7 @@ class BackendController extends Controller
         ]);
         //获取、缓存菜单
         $key = 'menulist-'.Yii::$app->user->id;
-        if(!Yii::$app->cache->get($key))
+        if(Yii::$app->session->getFlash('reflush') || !Yii::$app->cache->get($key))
         {
             $_list = $this->getMenulist();
             $sql = 'select max(updated_at),count(name) from auth_item';
@@ -102,6 +102,11 @@ class BackendController extends Controller
         $this->view->params['menulist'] = $_list;
     }
 
+    public function actionReflushmenu()
+    {
+        Yii::$app->session->setFlash('reflush');
+        return $this->goHome();
+    }
     public function beforeAction($action)
     {
         parent::beforeAction($action);

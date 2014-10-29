@@ -158,7 +158,7 @@ AppAsset::register($this);
     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
             <button class="btn btn-success">
-                <i class="icon-signal"></i>
+                <a href="/backend/reflushmenu"><i class="icon-signal"></i></a>
             </button>
 
             <button class="btn btn-info">
