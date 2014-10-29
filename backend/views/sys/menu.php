@@ -9,22 +9,7 @@ use backend\assets\TreeAsset;
 use yii\helpers\Url;
 
 TreeAsset::register($this);
-$this->registerJs("
-    $('.tree li:has(ul)').addClass('parent_li').find(' > span');
-    //默认收起
-//    $('.tree li.parent_li >span').parent('li.parent_li').find(' > ul > li').hide();
-    $('.tree li.parent_li > span').on('click', function (e) {
-        var children = $(this).parent('li.parent_li').find(' > ul > li');
-        if (children.is(':visible')) {
-            children.hide('fast');
-            $(this).find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
-        } else {
-            children.show('fast');
-            $(this).find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
-        }
-        e.stopPropagation();
-    });
-");
+
 
 $this->params['breadcrumbs'] = [
     '菜单管理'
@@ -88,3 +73,22 @@ $this->params['breadcrumbs'] = [
         </li>
     </ul>
 </div>
+<script>
+    <?php $this->beginBlock('aa') ?>
+    $('.tree li:has(ul)').addClass('parent_li').find(' > span');
+    //默认收起
+    //    $('.tree li.parent_li >span').parent('li.parent_li').find(' > ul > li').hide();
+    $('.tree li.parent_li > span').on('click', function (e) {
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(':visible')) {
+            children.hide('fast');
+            $(this).find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+        } else {
+            children.show('fast');
+            $(this).find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+        }
+        e.stopPropagation();
+    });
+    <?php $this->endBlock(); ?>
+</script>
+<?php $this->registerJs($this->blocks['aa']) ?>
