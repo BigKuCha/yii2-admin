@@ -227,10 +227,8 @@ class RbacController extends BackendController
         $model = TAdmUser::findOne($id);
         if(Yii::$app->request->isPost)
         {
-            $auth = Yii::$app->authManager;
             $action = Yii::$app->request->get('action');
             $roles = Yii::$app->request->post('roles');
-
             if($action=='assign')
             {
                 foreach($roles as $rolename)
