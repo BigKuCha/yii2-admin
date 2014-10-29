@@ -102,6 +102,10 @@ class BackendController extends Controller
         $this->view->params['menulist'] = $_list;
     }
 
+    /**
+     * 强制刷新菜单
+     * @return \yii\web\Response
+     */
     public function actionReflushmenu()
     {
         Yii::$app->session->setFlash('reflush');
