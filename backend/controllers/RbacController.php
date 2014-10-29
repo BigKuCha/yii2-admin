@@ -19,14 +19,14 @@
  *	      ┗┻┛　┗┻┛
  */
 namespace backend\controllers;
-header("Content-type:text/html;charset=utf-8");
+
 use backend\models\AuthItem;
 use backend\models\TAdmUser;
 use backend\models\TMenu;
-use common\components\MyHelper;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -216,13 +216,6 @@ class RbacController extends BackendController
             'role'=>Yii::$app->authManager->getRole($rolename)
         ]);
     }
-
-    public function actionTest()
-    {
-        $auth = Yii::$app->authManager;
-        $role = $auth->getRole('admin');
-        $auth->assign($role,1);
-    }
     /**
      * 给用户分配角色
      * @param $id
@@ -232,14 +225,49 @@ class RbacController extends BackendController
     {
         $auth = Yii::$app->authManager;
         $model = TAdmUser::findOne($id);
+        if(Yii::$app->request->isPost)
+        {
+            $auth = Yii::$app->authManager;
+            $action = Yii::$app->request->get('action');
+            $roles = Yii::$app->request->post('roles');
+
+            if($action=='assign')
+            {
+                foreach($roles as $rolename)
+                {
+                    $role = $auth->getRole($rolename);
+                    $auth->assign($role,$id);
+                }
+            }else
+            {
+                foreach($roles as $rolename)
+                {
+                    $role = $auth->getRole($rolename);
+                    $auth->revoke($role,$id);
+                }
+            }
+            //所有角色
+            $allroles = ArrayHelper::map($auth->getRoles(),'name','name');
+            //所有已选择的角色
+            $selectedroles = ArrayHelper::map($auth->getRolesByUser($id),'name','name');
+            $res = [
+                Html::renderSelectOptions('',array_diff($allroles,$selectedroles)),
+                Html::renderSelectOptions('',$selectedroles)
+            ];
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $res;
+        }
         //获取已有角色
         $assignedroles = ArrayHelper::map($auth->getRolesByUser($id),'name','name');
         //获取所有角色
-        $roles = ArrayHelper::map($auth->getRoles(),'name','name');
+        $allroles = ArrayHelper::map($auth->getRoles(),'name','name');
+        //未被选择的角色
+        $roles = array_diff($allroles,$assignedroles);
         return $this->render('assignrole',[
             'roles'=>$roles,
             'assignedroles'=>$assignedroles,
             'model'=>$model,
+            'id'=>$id
         ]);
     }
     /**
