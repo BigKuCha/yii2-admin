@@ -27,6 +27,7 @@ use Yii;
 use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
