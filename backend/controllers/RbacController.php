@@ -21,6 +21,7 @@
 namespace backend\controllers;
 header("Content-type:text/html;charset=utf-8");
 use backend\models\AuthItem;
+use backend\models\TAdmUser;
 use backend\models\TMenu;
 use common\components\MyHelper;
 use Yii;
@@ -230,13 +231,15 @@ class RbacController extends BackendController
     public function actionAssignrole($id)
     {
         $auth = Yii::$app->authManager;
+        $model = TAdmUser::findOne($id);
         //获取已有角色
         $assignedroles = ArrayHelper::map($auth->getRolesByUser($id),'name','name');
         //获取所有角色
         $roles = ArrayHelper::map($auth->getRoles(),'name','name');
         return $this->render('assignrole',[
             'roles'=>$roles,
-            'assignedroles'=>$assignedroles
+            'assignedroles'=>$assignedroles,
+            'model'=>$model,
         ]);
     }
     /**

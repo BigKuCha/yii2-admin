@@ -28,7 +28,17 @@ $this->params['breadcrumbs'] = [
     '角色授予'
 ];
 ?>
+<div class="col-lg-6">
+<?= \yii\widgets\DetailView::widget([
+    'model'=>$model,
+    'attributes'=>[
+        'username',
+    ],
+]) ?>
+</div>
+
 <p>
+<div class="col-lg-12">
 <div class="col-lg-5">
     所有角色:
     <?php
@@ -55,6 +65,7 @@ $this->params['breadcrumbs'] = [
         'size' => 20,
         'style' => 'width:100%']);
     ?>
+</div>
 </div>
 </div>
 </p>
