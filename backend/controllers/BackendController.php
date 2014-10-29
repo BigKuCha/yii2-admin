@@ -30,6 +30,8 @@ use yii\caching\ExpressionDependency;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\MethodNotAllowedHttpException;
+
 class BackendController extends Controller
 {
     public function behaviors()
@@ -126,6 +128,8 @@ class BackendController extends Controller
         $route = Yii::$app->requestedRoute;
         if(!Yii::$app->authManager->getPermission($route))
             return true;
+        if(!Yii::$app->user->can($route))
+            throw new MethodNotAllowedHttpException('未被授权！');
         return true;
     }
     public function getMenulist()
