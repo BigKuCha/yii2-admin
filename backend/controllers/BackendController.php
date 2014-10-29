@@ -24,7 +24,9 @@ namespace backend\controllers;
 use backend\models\TMenu;
 use kartik\widgets\ActiveForm;
 use Yii;
+use yii\caching\ChainedDependency;
 use yii\caching\DbDependency;
+use yii\caching\ExpressionDependency;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -94,8 +96,15 @@ class BackendController extends Controller
         if(Yii::$app->session->getFlash('reflush') || !Yii::$app->cache->get($key))
         {
             $_list = $this->getMenulist();
-            $sql = 'select max(updated_at),count(name) from auth_item';
-            Yii::$app->cache->set($key,$_list,0,new DbDependency(['sql'=>$sql]));
+            $dp = new ExpressionDependency([
+                'expression'=>'count(Yii::$app->authManager->getPermissionsByUser(Yii::$app->user->id))'
+            ]);
+            $dp2 = new DbDependency([
+                'sql'=>'select max(updated_at),count(name) from auth_item',
+            ]);
+            Yii::$app->cache->set($key,$_list,0,new ChainedDependency([
+                'dependencies'=>[$dp,$dp2]
+            ]));
 
         }else
             $_list = Yii::$app->cache->get($key);
