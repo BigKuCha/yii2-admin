@@ -7,7 +7,10 @@ use yii\helpers\Html;
 /* @var $message string */
 /* @var $exception Exception */
 
-$this->title = $name;
+//$this->title = $name;
+$this->params['breadcrumbs'] = [
+    $name,
+];
 ?>
 <div class="site-error">
 
@@ -16,12 +19,11 @@ $this->title = $name;
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
     </div>
-
     <p>
-        The above error occurred while the Web server was processing your request.
+        服务器在处理您的请求时发生以上错误！
     </p>
     <p>
-        Please contact us if you think this is a server error. Thank you.
+        如果你认为这是一个服务器错误，请联系我们。谢谢.
     </p>
 
 </div>

@@ -18,7 +18,11 @@
  *	      ┃┫┫　┃┫┫
  *	      ┗┻┛　┗┻┛
  */
+$this->params['breadcrumbs'] = [
+    '欢迎页'
+];
 ?>
-<?= $this->context->id ?>
-<?= Yii::$app->requestedRoute ?>
-<?= Yii::$app->requestedAction->id ?>
+<?= \kartik\widgets\Alert::widget([
+    'icon'=>'icon-comment-alt',
+    'body'=>'欢迎使用'.' <span class="kv-alert-title">'.Yii::$app->params['webname'].'</span>',
+]) ?>
