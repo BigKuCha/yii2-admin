@@ -211,10 +211,12 @@ class RbacController extends BackendController
         }
         $list = TMenu::find()->where('level=1')->all();
         $rolename = Yii::$app->request->get('rolename');
+        $model = AuthItem::findOne($rolename);
         return $this->render('assignauth',[
             'list'=>$list,
             'rolename'=>$rolename,
-            'role'=>Yii::$app->authManager->getRole($rolename)
+            'role'=>Yii::$app->authManager->getRole($rolename),
+            'model'=>$model,
         ]);
     }
     /**

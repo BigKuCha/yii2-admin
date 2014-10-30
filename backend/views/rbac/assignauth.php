@@ -5,6 +5,8 @@
  * Date: 2014/10/27
  * Time: 15:37:32
  */
+
+use yii\widgets\DetailView;
 $auth = Yii::$app->authManager;
 $user = Yii::$app->user;
 
@@ -16,6 +18,15 @@ $this->params['breadcrumbs'] = [
     '角色授权'
 ];
 ?>
+
+<?= DetailView::widget([
+    'model'=>$model,
+    'attributes'=>[
+        'name',
+        'description'
+    ]
+]) ?>
+
 <div class="table-responsive">
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
         <thead>
