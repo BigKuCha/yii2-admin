@@ -28,6 +28,7 @@ class AppAsset extends AssetBundle
         'js/typeahead-bs2.min.js',
         'js/ace-elements.min.js',
         'js/ace.min.js',
+        'js/jquery.cookie.js'
     ];
     public $depends = [
         'backend\assets\BootstrapjsAsset',

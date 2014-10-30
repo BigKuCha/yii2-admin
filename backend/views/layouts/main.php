@@ -48,13 +48,6 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <div class="navbar navbar-default" id="navbar">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('navbar', 'fixed')
-        } catch (e) {
-        }
-    </script>
-
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand" style="height: 40px">
@@ -146,15 +139,7 @@ AppAsset::register($this);
 <a class="menu-toggler" id="menu-toggler" href="#">
     <span class="menu-text"></span>
 </a>
-
 <div class="sidebar" id="sidebar">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('sidebar', 'fixed')
-        } catch (e) {
-        }
-    </script>
-
     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
             <button class="btn btn-success">
@@ -191,12 +176,6 @@ AppAsset::register($this);
         <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
            data-icon2="icon-double-angle-right"></i>
     </div>
-    <script type="text/javascript">
-        try {
-            ace.settings.check('sidebar', 'collapsed')
-        } catch (e) {
-        }
-    </script>
 </div>
 <div class="main-content">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -254,11 +233,15 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 <script type="text/javascript">
     jQuery(function ($) {
-        window.prettyPrint && prettyPrint();
-        $('#id-check-horizontal').removeAttr('checked').on('click', function () {
-            $('#dt-list-1').toggleClass('dl-horizontal').prev().html(this.checked ? '&lt;dl class="dl-horizontal"&gt;' : '&lt;dl&gt;');
-        });
-
+        //侧边栏收缩
+        var sidebar = $('#sidebar');
+        if($.cookie('sidebar')!='')
+        {
+            sidebar.attr('class', $.cookie('sidebar'));
+        }
+        sidebar.click(function(){
+            $.cookie('sidebar', sidebar.attr('class'), {path: '/'});
+        })
     })
 </script>
 </body>
