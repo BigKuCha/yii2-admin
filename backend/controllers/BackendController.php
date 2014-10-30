@@ -21,15 +21,10 @@
 
 namespace backend\controllers;
 
-use backend\models\TMenu;
 use kartik\widgets\ActiveForm;
 use Yii;
-use yii\caching\ChainedDependency;
-use yii\caching\DbDependency;
-use yii\caching\ExpressionDependency;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\web\MethodNotAllowedHttpException;
 
 class BackendController extends Controller
@@ -60,12 +55,6 @@ class BackendController extends Controller
                     return $this->redirect(['user/login']);
                 },
             ],
-            /*'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],*/
         ];
     }
 
@@ -93,24 +82,6 @@ class BackendController extends Controller
         Yii::$container->set(ActiveForm::className(),[
             'type'=>ActiveForm::TYPE_HORIZONTAL,
         ]);
-        //获取、缓存菜单
-        $key = 'menulist-'.Yii::$app->user->id;
-        if(Yii::$app->session->getFlash('reflush') || !Yii::$app->cache->get($key))
-        {
-            $_list = $this->getMenulist();
-            $dp = new ExpressionDependency([
-                'expression'=>'count(Yii::$app->authManager->getPermissionsByUser(Yii::$app->user->id))'
-            ]);
-            $dp2 = new DbDependency([
-                'sql'=>'select max(updated_at),count(name) from auth_item',
-            ]);
-            Yii::$app->cache->set($key,$_list,0,new ChainedDependency([
-                'dependencies'=>[$dp,$dp2]
-            ]));
-
-        }else
-            $_list = Yii::$app->cache->get($key);
-        $this->view->params['menulist'] = $_list;
     }
 
     /**
@@ -132,13 +103,4 @@ class BackendController extends Controller
             throw new MethodNotAllowedHttpException('未被授权！');
         return true;
     }
-    public function getMenulist()
-    {
-        $list = TMenu::find()->where('level=1')->all();
-        $menu = $this->renderPartial('@backend/views/home/_menu',[
-           'list'=>$list,
-        ]);
-        return $menu;
-    }
-
 }

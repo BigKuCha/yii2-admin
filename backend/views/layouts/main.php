@@ -185,7 +185,7 @@ AppAsset::register($this);
         </div>
     </div>
     <!-- #sidebar-shortcuts -->
-    <?= $this->params['menulist'] ?>
+    <?= Yii::$app->cache->get('menulist-'.Yii::$app->user->id) ?>
     <!-- /.nav-list -->
     <div class="sidebar-collapse" id="sidebar-collapse">
         <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
