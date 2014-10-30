@@ -233,7 +233,9 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 <script type="text/javascript">
     jQuery(function ($) {
-        //侧边栏收缩
+        //打开菜单
+        var route = '/<?= Yii::$app->requestedRoute ?>';
+        $("li:has(a[href='"+route+"'])").attr('class','active open');
         var sidebar = $('#sidebar');
         if($.cookie('sidebar')!='')
         {
