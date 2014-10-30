@@ -43,7 +43,6 @@ class SysController extends BackendController
         }
         if(Yii::$app->request->isPost)
         {
-
             $model->load(Yii::$app->request->post());
             if($model->save())
             {
