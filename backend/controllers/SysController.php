@@ -8,8 +8,6 @@
 
 namespace backend\controllers;
 
-use backend\models\TAdmUser;
-use common\components\MyHelper;
 use kartik\widgets\ActiveForm;
 use Yii;
 use backend\models\TMenu;
@@ -63,6 +61,7 @@ class SysController extends BackendController
     {
         $id = Yii::$app->request->get('id');
         $level = Yii::$app->request->get('level');
+        //循环删除是为了在afterDelete删除对应的permission
         //一级菜单先删除孙子节点
         if($level==1)
         {
@@ -87,16 +86,6 @@ class SysController extends BackendController
         }
         //删除自身
         TMenu::findOne($id)->delete();
-        //需改为循环删除
-        /*if($level==1)
-        {
-            $son = TMenu::find()->where(['parentid'=>$id])->column();
-            TMenu::deleteAll(['parentid'=>$son]);//删除孙子
-        }
-        if($level==2)
-            TMenu::deleteAll(['parentid'=>$id]);//删除儿子
-        //删除自身
-        TMenu::findOne($id)->delete();*/
         Yii::$app->session->setFlash('success');
         return $this->redirect(['sys/menu']);
     }
@@ -117,13 +106,4 @@ class SysController extends BackendController
             return ActiveForm::validate($model,'menuname');
         }
     }
-
-    public function actionTest()
-    {
-        $role = Yii::$app->authManager->createRole('admin');
-        $role->description = '系统管理员';
-        Yii::$app->authManager->add($role);
-        $roles = Yii::$app->authManager->getRoles();
-        return MyHelper::dump($roles);
-    }
-} 
+}
