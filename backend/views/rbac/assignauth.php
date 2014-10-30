@@ -35,7 +35,6 @@ $this->params['breadcrumbs'] = [
             <th>二三级菜单</th>
         </tr>
         </thead>
-
         <tbody>
         <?php
         foreach ($list as $f): ?>
@@ -75,14 +74,12 @@ $this->params['breadcrumbs'] = [
                                                onclick="ckbox(2,this)"/>
                                         <?= $son['menuname'] ?>
                                     </h6>
-
                                     <div class="widget-toolbar">
                                         <a href="#" data-action="collapse">
                                             <i class="icon-chevron-down"></i>
                                         </a>
                                     </div>
                                 </div>
-
                                 <div class="widget-body">
                                     <div class="widget-body-inner" style="display: block;">
                                         <div class="widget-main">
@@ -99,7 +96,6 @@ $this->params['breadcrumbs'] = [
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <?php endif; ?>
                         </div>
@@ -140,14 +136,6 @@ $this->params['breadcrumbs'] = [
         }
         //更新数据
         var data = 'level=' + level + '&menuid=' + id + '&cntlv3=' + cntlv3 + '&cntlv2=' + cntlv2 + '&ck=' + thischecked + '&rolename=' + '<?= $rolename ?>';
-        console.info(data);
         $.post('/rbac/assignauth',data);
-        /*$.ajax({
-            url: '/admin/rbac/assignauth',
-            type: 'post',
-            data: data,
-            success: function (o) {
-            }
-        })*/
     }
 </script>
