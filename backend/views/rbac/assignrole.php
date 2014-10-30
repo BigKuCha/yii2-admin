@@ -38,7 +38,6 @@ $this->params['breadcrumbs'] = [
     ]) ?>
 </div>
 
-<p>
 <div class="col-lg-12">
     <div class="col-lg-5">
         备选角色:
@@ -68,8 +67,6 @@ $this->params['breadcrumbs'] = [
         ?>
     </div>
 </div>
-</div>
-</p>
 <script>
     <?php $this->beginBlock('JS_END') ?>
     yii.process = (function ($)
