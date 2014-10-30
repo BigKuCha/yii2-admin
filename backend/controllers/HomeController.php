@@ -45,8 +45,9 @@ class HomeController extends Controller
     {
         //缓存一个带有依赖的缓存
         $key = '_menu'.Yii::$app->user->id;
-        if(!Yii::$app->cache->get($key))
+        if(Yii::$app->session->getFlash('reflush') || !Yii::$app->cache->get($key))
         {
+            //如果缓存依赖发生改变，重新生成缓存
             $dp = new ExpressionDependency([
                 'expression'=>'count(Yii::$app->authManager->getPermissionsByUser(Yii::$app->user->id))'
             ]);
@@ -57,6 +58,7 @@ class HomeController extends Controller
                 'dependencies'=>[$dp,$dp2]
             ]));
             $_list = $this->getMenulist();
+            //利用上面的缓存依赖生成菜单的永久缓存
             Yii::$app->cache->set('menulist-'.Yii::$app->user->id,$_list,0);
         }
         return $this->render('index',[]);
