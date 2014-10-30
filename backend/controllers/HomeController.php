@@ -27,9 +27,32 @@ use yii\caching\ExpressionDependency;
 use yii\caching\DbDependency;
 use backend\models\TMenu;
 use yii\web\Controller;
-
+use yii\filters\AccessControl;
 class HomeController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['error'],
+                        'allow' => true,
+                    ],
+                ],
+                'denyCallback'=>function($rules, $action)
+                {
+                    Yii::$app->user->returnUrl = Yii::$app->request->url;
+                    return $this->redirect(['user/login']);
+                },
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -57,19 +80,10 @@ class HomeController extends Controller
             Yii::$app->cache->set($key,'nothing',0,new ChainedDependency([
                 'dependencies'=>[$dp,$dp2]
             ]));
-            $_list = $this->getMenulist();
             //利用上面的缓存依赖生成菜单的永久缓存
+            $_list = TMenu::generateMenuByUser();
             Yii::$app->cache->set('menulist-'.Yii::$app->user->id,$_list,0);
         }
         return $this->render('index',[]);
     }
-    //获取用户菜单
-    protected  function getMenulist()
-    {
-        $list = TMenu::find()->where('level=1')->all();
-        $menu = $this->renderPartial('@backend/views/home/_menu',[
-            'list'=>$list,
-        ]);
-        return $menu;
-    }
-} 
+}

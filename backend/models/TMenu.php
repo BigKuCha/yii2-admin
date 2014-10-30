@@ -97,4 +97,17 @@ class TMenu extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TMenu::className(),['id'=>'parentid']);
     }
+
+    /**
+     * 生成菜单
+     * @return string
+     */
+    public static function generateMenuByUser()
+    {
+        $list = TMenu::find()->where('level=1')->all();
+        $menu = Yii::$app->controller->renderPartial('@backend/views/home/_menu',[
+            'list'=>$list,
+        ]);
+        return $menu;
+    }
 }
