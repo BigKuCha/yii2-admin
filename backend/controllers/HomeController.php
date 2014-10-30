@@ -75,7 +75,7 @@ class HomeController extends Controller
                 'expression'=>'count(Yii::$app->authManager->getPermissionsByUser(Yii::$app->user->id))'
             ]);
             $dp2 = new DbDependency([
-                'sql'=>'select max(updated_at),count(name) from auth_item',
+                'sql'=>'select max(updated_at) from auth_item',
             ]);
             Yii::$app->cache->set($key,'nothing',0,new ChainedDependency([
                 'dependencies'=>[$dp,$dp2]
