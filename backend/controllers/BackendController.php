@@ -58,6 +58,9 @@ class BackendController extends Controller
         ];
     }
 
+    /**
+     * 初始化
+     */
     public function init()
     {
         Yii::$container->set('yii\widgets\LinkPager',[
@@ -97,6 +100,7 @@ class BackendController extends Controller
     {
         parent::beforeAction($action);
         $route = Yii::$app->requestedRoute;
+        //未加入权限控制的所有路由允许访问
         if(!Yii::$app->authManager->getPermission($route))
             return true;
         if(!Yii::$app->user->can($route))
