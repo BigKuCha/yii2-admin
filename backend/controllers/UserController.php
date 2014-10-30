@@ -108,13 +108,4 @@ class UserController extends BackendController
             return ActiveForm::validate($model,'username');
         }
     }
-
-    public function actionMenu()
-    {
-        $list = TMenu::find()->where('level=1')->all();
-        return $this->render('menu',[
-            'list'=>$list,
-        ]);
-        return MyHelper::dump($list);
-    }
-} 
+}
