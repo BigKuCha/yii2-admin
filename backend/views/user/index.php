@@ -18,9 +18,10 @@
  *	      ┃┫┫　┃┫┫
  *	      ┗┻┛　┗┻┛
  */
-use yii\grid\SerialColumn;
+header("Content-type:text/html;charset=utf-8");
 use yii\bootstrap\Modal;
 use kartik\widgets\ActiveForm;
+use common\components\MyHelper;
 $this->params['breadcrumbs'] = [
     '用户管理',
 ];
@@ -56,13 +57,7 @@ Modal::end();
 <?= \yii\grid\GridView::widget([
     'dataProvider'=>$dataprovider,
     'columns'=>[
-        [
-            'class'=>'yii\grid\CheckboxColumn',
-        ],
-        [
-            'header'=>'编号',
-            'class' => SerialColumn::className()
-        ],
+        'id',
         'username',
         'password',
         [
@@ -72,8 +67,12 @@ Modal::end();
             'buttons'=>[
                 'view'=>function($url,$model,$key)
                 {
-                    return \common\components\MyHelper::actionbutton('/rbac/assignrole?id='.$key,'view',['title'=>'查看/添加角色']);
+                    return $key==1?null:MyHelper::actionbutton('/rbac/assignrole?id='.$key,'view',['title'=>'查看/添加角色']);
                 },
+                'delete'=>function($url,$model,$key)
+                {
+                    return $key==1?null:MyHelper::actionbutton($url,'delete');
+                }
             ]
         ],
     ],
