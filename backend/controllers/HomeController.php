@@ -84,6 +84,6 @@ class HomeController extends Controller
             $_list = TMenu::generateMenuByUser();
             Yii::$app->cache->set('menulist-'.Yii::$app->user->id,$_list,0);
         }
-        return $this->render('index',[]);
+        return $this->render('index');
     }
 }

@@ -22,7 +22,7 @@
 ?>
 <ul class="nav nav-list">
     <?php foreach ($list as $father): ?>
-        <?php if (Yii::$app->user->can($father->route)): ?>
+        <?php if ($admin || Yii::$app->user->can($father->route)): ?>
             <li>
                 <a href="#" class="dropdown-toggle">
                     <i class="<?= $father->menuicon ?>"></i>
@@ -32,14 +32,14 @@
                 </a>
                 <ul class="submenu">
                     <?php foreach ($father->getSon()->all() as $son): ?>
-                        <?php if ($son->level == 3 && Yii::$app->user->can($son->route)): ?>
+                        <?php if ($son->level == 3 && $admin && Yii::$app->user->can($son->route)): ?>
                             <li>
                                 <a href="/<?= $son->route ?>">
                                     <i class="icon-double-angle-right"></i>
                                     <?= $son->menuname ?>
                                 </a>
                             </li>
-                        <?php elseif (Yii::$app->user->can($son->route)): ?>
+                        <?php elseif ($admin || Yii::$app->user->can($son->route)): ?>
                             <li>
                                 <a href="#" class="dropdown-toggle">
                                     <i class="icon-double-angle-right"></i>
@@ -48,7 +48,7 @@
                                 </a>
                                 <ul class="submenu">
                                     <?php foreach ($son->getSon()->all() as $gson): ?>
-                                        <?php if (Yii::$app->user->can($gson->route)): ?>
+                                        <?php if ($admin || Yii::$app->user->can($gson->route)): ?>
                                             <li>
                                                 <a href="/<?= $gson->route ?>">
                                                     <i class="<?= $gson->menuicon ?>"></i>

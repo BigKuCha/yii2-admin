@@ -107,6 +107,7 @@ class TMenu extends \yii\db\ActiveRecord
         $list = TMenu::find()->where('level=1')->all();
         $menu = Yii::$app->controller->renderPartial('@backend/views/home/_menu',[
             'list'=>$list,
+            'admin'=>(Yii::$app->user->id==1)?true:false
         ]);
         return $menu;
     }
