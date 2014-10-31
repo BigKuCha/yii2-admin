@@ -23,8 +23,8 @@ Yii2开发的后台管理系统
 实例
 ------------
 ![image](https://github.com/BigKuCha/yga/blob/master/tests/img/demo1.jpg)
-![image](https://github.com/BigKuCha/yga/blob/master/tests/img/demo2.jpg)
-![image](https://github.com/BigKuCha/yga/blob/master/tests/img/demo3.jpg)
+![image](https://github.com/BigKuCha/yga/blob/master/tests/img/demo2.png)
+![image](https://github.com/BigKuCha/yga/blob/master/tests/img/demo3.png)
 
 ------------
 
