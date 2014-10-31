@@ -32,7 +32,7 @@
                 </a>
                 <ul class="submenu">
                     <?php foreach ($father->getSon()->all() as $son): ?>
-                        <?php if ($son->level == 3 && $admin && Yii::$app->user->can($son->route)): ?>
+                        <?php if ($son->level == 3  && ($admin || Yii::$app->user->can($son->route))): ?>
                             <li>
                                 <a href="/<?= $son->route ?>">
                                     <i class="icon-double-angle-right"></i>

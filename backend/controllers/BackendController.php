@@ -103,7 +103,7 @@ class BackendController extends Controller
         //未加入权限控制的所有路由允许访问
         if(!Yii::$app->authManager->getPermission($route))
             return true;
-        if(!Yii::$app->user->can($route))
+        if(Yii::$app->user->id!=1 && !Yii::$app->user->can($route))
             throw new MethodNotAllowedHttpException('未被授权！');
         return true;
     }
