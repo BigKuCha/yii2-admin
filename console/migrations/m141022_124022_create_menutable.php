@@ -22,6 +22,13 @@ class m141022_124022_create_menutable extends Migration
 
             'level' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 1',
         ], $tableOptions);
+        $sql = "INSERT INTO `t_menu` (`id`, `menuname`, `parentid`, `route`, `menuicon`, `level`) VALUES
+(1, '设置', 0, 'conf', 'icon-cog', 1),
+(2, '菜单管理', 1, 'sys/menu', 'icon-book', 3),
+(3, '用户管理', 1, 'user/index', 'icon-book', 3),
+(4, '权限管理', 1, 'rbac', 'icon-book', 2),
+(5, '角色管理', 4, 'rbac/roles', 'icon-book', 3);";
+        $this->execute($sql);
     }
 
     public function down()
