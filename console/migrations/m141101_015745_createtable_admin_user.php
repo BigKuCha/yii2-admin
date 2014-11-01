@@ -17,9 +17,11 @@ class m141101_015745_createtable_admin_user extends Migration
             'username' => Schema::TYPE_STRING . '(64) NOT NULL',
             'password' => Schema::TYPE_STRING . '(64) NOT NULL',
         ], $tableOptions);
+        $pw1 = Yii::$app->security->generatePasswordHash('admin');
+        $pw2 = Yii::$app->security->generatePasswordHash('demo');
         $sql = "INSERT INTO `t_adm_user` (`id`, `username`, `password`) VALUES
-(1, 'admin', '$2y$13$EHPdK7.j6sAJyxurOQ0IJOR3/.2T1iU8wTbqfRDILY2xZbapuD8zq'),
-(2, 'demo', '$2y$13$BLO2fX2gXESpt9THvNNr5eyU2vRMptAIp0tgUA8TkUn254SDfpRKu');";
+(1, 'admin', '$pw1'),
+(2, 'demo', '$pw2');";
         $this->execute($sql);
     }
 
