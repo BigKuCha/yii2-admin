@@ -22,7 +22,7 @@ Yii2开发的后台管理系统
 开启apache的rewite模块，网站根目录指向`web/`  
 **NOTE:** 如果不开启rewite，需要重新配置路由
 
-实例
+图示
 ------------
 ![image](https://github.com/BigKuCha/yga/blob/master/tests/img/demo1.jpg)
 ![image](https://github.com/BigKuCha/yga/blob/master/tests/img/demo2.png)
