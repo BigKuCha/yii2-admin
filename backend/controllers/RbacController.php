@@ -100,7 +100,6 @@ class RbacController extends BackendController
             Yii::$app->session->setFlash('fail','角色删除失败');
         return $this->redirect(['rbac/roles']);
     }
-
     /**
      * ajax验证角色是否存在
      * @return array
