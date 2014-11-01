@@ -10,8 +10,10 @@ Yii2开发的后台管理系统
 1.  直接运行`git clone https://github.com/BigKuCha/yga.git`克隆到工作目录，或者直接下载zip包
 2.  运行`composer update` 安装yii2核心文件
 3.  创建数据库 `nevermore` 编码 `utf8-unicode-ci`
-4.  运行`yii migrate`导入菜单表`t_menu`
-5.  运行`yii migrate --migrationPath=@yii/rbac/migrations/`导入Yii官方提供的权限控制表
+4.  运行`init` 初始化项目(生成入口脚本、创建runtime目录等)
+5.  删除`common/config/main-local.php`里的db配置(采用`common/config/db.php`里的就可以)
+5.  运行`yii migrate`导入菜单表`t_menu`和用户表`t_admin_user`
+6.  运行`yii migrate --migrationPath=@yii/rbac/migrations/`导入Yii官方提供的权限控制表
 
 配置
 -------------
