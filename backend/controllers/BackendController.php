@@ -25,6 +25,7 @@ use kartik\widgets\ActiveForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use yii\web\Cookie;
 use yii\web\MethodNotAllowedHttpException;
 
 class BackendController extends Controller
@@ -99,6 +100,10 @@ class BackendController extends Controller
     public function beforeAction($action)
     {
         parent::beforeAction($action);
+        //访问非菜单里的action时，菜单保持打开(添加角色时角色管理保持打开状态)
+        $refferroute = Yii::$app->request->referrer;
+        $_referrer = parse_url($refferroute);
+        Yii::$app->session->set('referrerroute',$_referrer['path']);
         $route = Yii::$app->requestedRoute;
         //未加入权限控制的所有路由允许访问
         if(!Yii::$app->authManager->getPermission($route))
@@ -107,4 +112,12 @@ class BackendController extends Controller
             throw new MethodNotAllowedHttpException('未被授权！');
         return true;
     }
+
+    /*public function afterAction($action,$result)
+    {
+        $refferroute = Yii::$app->request->referrer;
+        $_referrer = parse_url($refferroute);
+        Yii::$app->session->setFlash('referrerroute',$_referrer['path']);
+        parent::afterAction($action,$result);
+    }*/
 }
