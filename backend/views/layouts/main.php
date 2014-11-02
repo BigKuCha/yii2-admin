@@ -29,20 +29,13 @@ AppAsset::register($this);
 <head>
     <meta charset="utf-8"/>
     <title><?= Yii::$app->params['webname'].'-'.(is_array($this->params['breadcrumbs'])?end($this->params['breadcrumbs']):'未定义') ?></title>
-    <!-- basic styles -->
 
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css"/>
-    <![endif]-->
+    <!--貌似没什么用-->
+    <?= Html::cssFile('/css/font-awesome-ie7.min.css',['condition'=>'IE 7']) ?>
+    <?= Html::cssFile('/css/ace-ie.min.css',['condition'=>'lte IE 8']) ?>
+    <?= Html::jsFile('/js/html5shiv.js',['condition'=>'lte IE 9']) ?>
+    <?= Html::jsFile('/js/respond.min.js',['condition'=>'lte IE 9']) ?>
 
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
-    <![endif]-->
-
-    <!--[if lt IE 9]>
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
     <?php $this->head() ?>
 </head>
 <body>
@@ -53,7 +46,7 @@ AppAsset::register($this);
             <a href="#" class="navbar-brand" style="height: 40px">
                 <small>
                     <i class="icon-flag"></i>
-                    Nevermore
+                    <?= Yii::$app->params['webname'] ?>
                 </small>
             </a><!-- /.brand -->
         </div>
