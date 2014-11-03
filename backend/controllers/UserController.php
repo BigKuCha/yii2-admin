@@ -27,7 +27,9 @@ use app\models\LoginForm;
 use Yii;
 use backend\models\TAdmUser;
 use yii\data\ActiveDataProvider;
+use yii\helpers\FileHelper;
 use yii\web\Response;
+use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 
 class UserController extends BackendController
@@ -107,5 +109,35 @@ class UserController extends BackendController
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model,'username');
         }
+    }
+
+    public function actionSetphoto()
+    {
+        $up = UploadedFile::getInstanceByName('photo');
+        if($up && !$up->getHasError())
+        {
+            $userid = Yii::$app->user->id;
+            $filename = $userid.'-'.date('YmdHis').'.'.$up->getExtension();
+            $path = Yii::getAlias('@backend/web/upload').'/user/';
+            FileHelper::createDirectory($path);
+            $up->saveAs($path.$filename);
+            $model = TAdmUser::findOne($userid);
+            $oldphoto = $model->userphoto;
+            $model->userphoto = $filename;
+            if($model->update())
+            {
+                Yii::$app->session->setFlash('success');
+                //删除旧头像
+                if(is_file($path.$oldphoto))
+                    unlink($path.$oldphoto);
+                return $this->goHome();
+            }else
+            {
+                print_r($model->getErrors());exit;
+            }
+        }
+        return $this->render('setphoto',[
+            'preview'=>Yii::$app->user->identity->userphoto,
+        ]);
     }
 }

@@ -30,8 +30,8 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             ['username','unique'],
-            [['username', 'password','password_repeat'], 'required'],
-            [['username', 'password'], 'string', 'max' => 255],
+            [['username', 'password'], 'required'],
+            [['username', 'password', 'userphoto'], 'string', 'max' => 255],
             ['password_repeat','compare','compareAttribute'=>'password']
         ];
     }
@@ -45,7 +45,8 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
             'id' => 'ID',
             'username' => '用户名',
             'password' => '密码',
-            'password_repeat'=>'重复密码'
+            'password_repeat'=>'重复密码',
+            'userphoto'=>'用户头像',
         ];
     }
     public function beforeSave($insert)

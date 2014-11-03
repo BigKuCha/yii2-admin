@@ -16,6 +16,7 @@ class m141101_015745_createtable_admin_user extends Migration
             'id' => Schema::TYPE_PK,
             'username' => Schema::TYPE_STRING . '(64) NOT NULL',
             'password' => Schema::TYPE_STRING . '(64) NOT NULL',
+            'userphoto' => Schema::TYPE_STRING . '(64) NOT NULL',
         ], $tableOptions);
         $pw1 = Yii::$app->security->generatePasswordHash('admin');
         $pw2 = Yii::$app->security->generatePasswordHash('demo');
