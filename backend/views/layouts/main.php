@@ -99,14 +99,14 @@ AppAsset::register($this);
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
                             <a href="/user/setphoto">
-                                <i class="icon-cog"></i>
+                                <i class="icon-user"></i>
                                 设置头像
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="icon-user"></i>
-                                个人信息
+                                <i class="icon-edit"></i>
+                                修改密码
                             </a>
                         </li>
                         <li class="divider"></li>
