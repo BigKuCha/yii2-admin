@@ -228,9 +228,9 @@ AppAsset::register($this);
     jQuery(function ($) {
         //菜单收缩
         var route = '/<?= Yii::$app->requestedRoute ?>';
-        if($("li:has(a[href='"+route+"'])").length==0)
+        if($("#sidebar li:has(a[href='"+route+"'])").length==0)
             route = '<?= Yii::$app->session->get('referrerroute') ?>';
-        $("li:has(a[href='"+route+"'])").attr('class','active open');
+        $("#sidebar li:has(a[href='"+route+"'])").attr('class','active open');
         //侧边收缩
         var sidebar = $('#sidebar');
         if($.cookie('sidebar')!='')
