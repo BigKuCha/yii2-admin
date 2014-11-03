@@ -113,11 +113,9 @@ class BackendController extends Controller
         return true;
     }
 
-    /*public function afterAction($action,$result)
+    public function afterAction($action,$result)
     {
-        $refferroute = Yii::$app->request->referrer;
-        $_referrer = parse_url($refferroute);
-        Yii::$app->session->setFlash('referrerroute',$_referrer['path']);
         parent::afterAction($action,$result);
-    }*/
+        return $result;
+    }
 }
