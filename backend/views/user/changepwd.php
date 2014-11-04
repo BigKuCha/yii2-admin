@@ -19,6 +19,9 @@
  *	      ┗┻┛　┗┻┛
  */
 use yii\widgets\ActiveForm;
+$this->params['breadcrumbs'] = [
+    '修改密码'
+];
 ?>
 <div class="col-lg-6">
     <?php $form = ActiveForm::begin([]) ?>
