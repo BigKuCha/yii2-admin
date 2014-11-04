@@ -104,7 +104,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?= \yii\helpers\Url::to(['user/changepwd']) ?>">
                                 <i class="icon-edit"></i>
                                 修改密码
                             </a>

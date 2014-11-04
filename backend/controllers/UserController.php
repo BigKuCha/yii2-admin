@@ -41,7 +41,7 @@ class UserController extends BackendController
             'query'=>$q,
         ]);
         return $this->render('index',[
-            'model'=>new TAdmUser(),
+            'model'=>new TAdmUser(['scenario'=>'create']),
             'dataprovider'=>$dataprovider
         ]);
     }
@@ -65,7 +65,15 @@ class UserController extends BackendController
             'model'=>$model
         ]);
     }
-
+    public function actionDelete($id)
+    {
+        $model = TAdmUser::findOne($id);
+        if($model->delete())
+            Yii::$app->session->setFlash('success');
+        else
+            Yii::$app->session->setFlash('fail','删除失败');
+        return $this->redirect(['user/index']);
+    }
     /**
      * 登出
      * @return \yii\web\Response
@@ -84,7 +92,7 @@ class UserController extends BackendController
      */
     public function actionAdduser()
     {
-        $model = new TAdmUser();
+        $model = new TAdmUser(['scenario'=>'create']);
         if(Yii::$app->request->isPost)
         {
             $model->load($_POST);
@@ -111,6 +119,11 @@ class UserController extends BackendController
         }
     }
 
+    /**
+     * 设置头像
+     * @return string|Response
+     * @throws \Exception
+     */
     public function actionSetphoto()
     {
         $up = UploadedFile::getInstanceByName('photo');
@@ -138,6 +151,24 @@ class UserController extends BackendController
         }
         return $this->render('setphoto',[
             'preview'=>Yii::$app->user->identity->userphoto,
+        ]);
+    }
+
+    public function actionChangepwd()
+    {
+        $model = TAdmUser::findOne(Yii::$app->user->id);
+        $model->scenario = 'chgpwd';
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->save())
+                Yii::$app->session->setFlash('success');
+            else
+                Yii::$app->session->setFlash('fail');
+            return $this->goHome();
+        }
+        return $this->render('changepwd',[
+            'model'=>$model,
         ]);
     }
 }

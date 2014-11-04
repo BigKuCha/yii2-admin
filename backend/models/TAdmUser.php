@@ -31,6 +31,7 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             ['username','unique'],
             [['username', 'password'], 'required'],
+            ['password_repeat','required','on'=>['create','chgpwd']],
             [['username', 'password', 'userphoto'], 'string', 'max' => 255],
             ['password_repeat','compare','compareAttribute'=>'password']
         ];

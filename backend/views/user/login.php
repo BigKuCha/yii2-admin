@@ -63,6 +63,7 @@
                                    placeholder="密码"/>
                             <i class="icon-lock"></i>
                         </span>
+                        <span class="alert-danger"><?= $model->getFirstError('password') ?></span>
                     </label>
 
                     <div class="space"></div>
