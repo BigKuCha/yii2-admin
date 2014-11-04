@@ -86,6 +86,12 @@ class BackendController extends Controller
         Yii::$container->set(ActiveForm::className(),[
             'type'=>ActiveForm::TYPE_HORIZONTAL,
         ]);
+        Yii::$container->set('yii\captcha\Captcha',[
+            'captchaAction'=>'home/captcha'
+        ]);
+        Yii::$container->set('yii\captcha\CaptchaValidator',[
+            'captchaAction'=>'home/captcha'
+        ]);
     }
 
     /**

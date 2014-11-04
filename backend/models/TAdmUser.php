@@ -11,10 +11,12 @@ use yii\web\IdentityInterface;
  * @property integer $id
  * @property string $username
  * @property string $password
+ * @property string $userphoto
  */
 class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
 {
     public $password_repeat;
+    public $verifyCode;
     /**
      * @inheritdoc
      */
@@ -31,7 +33,8 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             ['username','unique'],
             [['username', 'password'], 'required'],
-            ['password_repeat','required','on'=>['create','chgpwd']],
+            [['password_repeat'],'required','on'=>['create','chgpwd']],
+            ['verifyCode','captcha','on'=>['create','chgpwd']],
             [['username', 'password', 'userphoto'], 'string', 'max' => 255],
             ['password_repeat','compare','compareAttribute'=>'password']
         ];
@@ -47,6 +50,7 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
             'username' => '用户名',
             'password' => '密码',
             'password_repeat'=>'重复密码',
+            'verifyCode'=>'验证码',
             'userphoto'=>'用户头像',
         ];
     }

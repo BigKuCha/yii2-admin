@@ -43,6 +43,7 @@ $form = ActiveForm::begin([
 <?= $form->field($model,'username',['enableAjaxValidation'=>true])->textInput() ?>
 <?= $form->field($model,'password')->passwordInput() ?>
 <?= $form->field($model,'password_repeat')->passwordInput() ?>
+<?= $form->field($model,'verifyCode')->widget(\yii\captcha\Captcha::className(),['captchaAction'=>'home/captcha']) ?>
 
 <?php
 $form->end();
