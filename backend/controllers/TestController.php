@@ -2,20 +2,48 @@
 /**
  * Created by PhpStorm.
  * User: olebar
- * Date: 2014/11/5
- * Time: 17:22:45
+ * Date: 2014/11/6
+ * Time: 11:14:32
  */
 
 namespace backend\controllers;
 
-use Yii;
-use yii\rest\ActiveController;
 
-class TestController extends ActiveController
+use backend\behaviors\TestBehavior;
+use yii\web\Controller;
+
+class TestController extends Controller
 {
-    public $modelClass = 'backend\models\TAdmUser';
-    function x()
+    public function behaviors()
     {
-        Yii::$app->controller->action->id;
+        return [
+            [
+                'class'=>TestBehavior::className(),
+                'msg'=>'APEC开的真操蛋！'
+            ]
+        ];
     }
-}
+
+    /**
+     * 事件
+     * @return string
+     */
+    public function actionEvent()
+    {
+        $this->on(Controller::EVENT_AFTER_ACTION,[$this,'hello']);
+        $this->on(Controller::EVENT_AFTER_ACTION,function(){
+            echo "我是来自匿名函数的事件<br>";
+        });
+        self::say();
+        return '---------';
+    }
+
+    /**
+     * 事件处理器
+     */
+    public function Hello()
+    {
+        echo 'hello World!';
+    }
+
+} 
