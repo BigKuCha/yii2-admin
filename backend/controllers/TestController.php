@@ -38,6 +38,12 @@ class TestController extends Controller
         return '---------';
     }
 
+    public function actionTest()
+    {
+        self::say();
+        return '++++++';
+    }
+
     /**
      * 事件处理器
      */
