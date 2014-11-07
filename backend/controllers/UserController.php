@@ -21,6 +21,7 @@
 
 namespace backend\controllers;
 
+use backend\models\forsearch\TAdmUserSearch;
 use backend\models\TMenu;
 use common\components\MyHelper;
 use app\models\LoginForm;
@@ -36,13 +37,17 @@ class UserController extends BackendController
 {
     public function actionIndex()
     {
-        $q = TAdmUser::find();
+
+        /*$q = TAdmUser::find();
         $dataprovider = new ActiveDataProvider([
             'query'=>$q,
-        ]);
+        ]);*/
+        $searchmodel = new TAdmUserSearch();
+        $dataprovider = $searchmodel->search(Yii::$app->request->getQueryParams());
         return $this->render('index',[
             'model'=>new TAdmUser(['scenario'=>'create']),
-            'dataprovider'=>$dataprovider
+            'dataprovider'=>$dataprovider,
+            'searchmodel'=>$searchmodel,
         ]);
     }
 

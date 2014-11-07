@@ -57,7 +57,7 @@ Modal::end();
 </p>
 <?= \yii\grid\GridView::widget([
     'dataProvider'=>$dataprovider,
-    'filterModel'=>'backend\models\forsearch\TAdmUserSearch',
+    'filterModel'=>$searchmodel,
     'columns'=>[
         'id',
         'username',
