@@ -77,9 +77,6 @@ class BackendController extends Controller
         Yii::$container->set('yii\data\Pagination',[
             'defaultPageSize'=>15
         ]);
-        Yii::$container->set('yii\grid\GridView',[
-            'layout'=>"{items}\n{pager}",
-        ]);
         Yii::$container->set('yii\grid\ActionColumn',[
             'template'=>'{update} {delete}',
         ]);
