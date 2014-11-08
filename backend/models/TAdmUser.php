@@ -60,6 +60,16 @@ class TAdmUser extends \yii\db\ActiveRecord implements IdentityInterface
             $this->password = Yii::$app->security->generatePasswordHash($this->password);
         return true;
     }
+
+    /**
+     * 关联获取角色
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRoles()
+    {
+        return $this->hasMany(AuthAssignment::className(),['user_id'=>'id']);
+    }
+
     public static function findByusername($username)
     {
         return static::find()->where('username=:u',[':u'=>$username])->one();

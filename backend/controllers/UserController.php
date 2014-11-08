@@ -22,12 +22,9 @@
 namespace backend\controllers;
 
 use backend\models\forsearch\TAdmUserSearch;
-use backend\models\TMenu;
-use common\components\MyHelper;
 use app\models\LoginForm;
 use Yii;
 use backend\models\TAdmUser;
-use yii\data\ActiveDataProvider;
 use yii\helpers\FileHelper;
 use yii\web\Response;
 use yii\web\UploadedFile;
@@ -35,13 +32,11 @@ use yii\widgets\ActiveForm;
 
 class UserController extends BackendController
 {
+    /*
+     * 用户管理
+     */
     public function actionIndex()
     {
-
-        /*$q = TAdmUser::find();
-        $dataprovider = new ActiveDataProvider([
-            'query'=>$q,
-        ]);*/
         $searchmodel = new TAdmUserSearch();
         $dataprovider = $searchmodel->search(Yii::$app->request->getQueryParams());
         return $this->render('index',[
@@ -70,6 +65,13 @@ class UserController extends BackendController
             'model'=>$model
         ]);
     }
+
+    /**
+     * 删除用户
+     * @param $id
+     * @return Response
+     * @throws \Exception
+     */
     public function actionDelete($id)
     {
         $model = TAdmUser::findOne($id);
@@ -159,6 +161,10 @@ class UserController extends BackendController
         ]);
     }
 
+    /**
+     * 修改密码
+     * @return string|Response
+     */
     public function actionChangepwd()
     {
         $model = TAdmUser::findOne(Yii::$app->user->id);
