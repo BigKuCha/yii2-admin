@@ -61,7 +61,10 @@ Modal::end();
     'filterModel' => $searchmodel,
     'columns' => [
         'id',
-        'username',
+        [
+            'attribute'=>'username',
+            'filter'=>['admin'=>'系统管理员','demo'=>'屌丝管理员','hello'=>'嘻哈管理员'],
+        ],
         'password',
         [
             'header' => '角色',
