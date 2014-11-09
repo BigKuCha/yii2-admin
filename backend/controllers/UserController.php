@@ -45,7 +45,6 @@ class UserController extends BackendController
             'searchmodel'=>$searchmodel,
         ]);
     }
-
     /**
      * 登陆
      * @return null|string
@@ -65,7 +64,6 @@ class UserController extends BackendController
             'model'=>$model
         ]);
     }
-
     /**
      * 删除用户
      * @param $id
@@ -90,7 +88,6 @@ class UserController extends BackendController
         Yii::$app->user->logout();
         return $this->goHome();
     }
-
     /**
      * 添加用户
      * @return null|string
