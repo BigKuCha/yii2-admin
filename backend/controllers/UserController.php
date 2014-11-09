@@ -107,7 +107,7 @@ class UserController extends BackendController
                 Yii::$app->session->setFlash('success');
             else
                 Yii::$app->session->setFlash('fail','添加失败');
-            return $this->goBack(['user/index']);
+            return $this->redirect(['user/index']);
         }
     }
 
