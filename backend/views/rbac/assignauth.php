@@ -136,6 +136,7 @@ $this->params['breadcrumbs'] = [
         }
         //更新数据
         var data = 'level=' + level + '&menuid=' + id + '&cntlv3=' + cntlv3 + '&cntlv2=' + cntlv2 + '&ck=' + thischecked + '&rolename=' + '<?= $rolename ?>';
-        $.post('/rbac/assignauth',data);
+        $.post('<?= \yii\helpers\Url::toRoute(['/rbac/assignauth']) ?>',data);
+//        $.post('/rbac/assignauth',data);
     }
 </script>

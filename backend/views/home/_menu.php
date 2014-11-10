@@ -18,7 +18,7 @@
  *          ┃┫┫　┃┫┫
  *          ┗┻┛　┗┻┛
  */
-
+use yii\helpers\Url;
 ?>
 <ul class="nav nav-list">
     <?php foreach ($list as $father): ?>
@@ -34,7 +34,7 @@
                     <?php foreach ($father->getSon()->all() as $son): ?>
                         <?php if ($son->level == 3  && ($admin || Yii::$app->user->can($son->route))): ?>
                             <li>
-                                <a href="/<?= $son->route ?>">
+                                <a href="<?= Url::toRoute($son->route) ?>">
                                     <i class="icon-double-angle-right"></i>
                                     <?= $son->menuname ?>
                                 </a>
@@ -50,7 +50,7 @@
                                     <?php foreach ($son->getSon()->all() as $gson): ?>
                                         <?php if ($admin || Yii::$app->user->can($gson->route)): ?>
                                             <li>
-                                                <a href="/<?= $gson->route ?>">
+                                                <a href="<?= Url::toRoute($gson->route) ?>">
                                                     <i class="<?= $gson->menuicon ?>"></i>
                                                     <?= $gson->menuname ?>
                                                 </a>

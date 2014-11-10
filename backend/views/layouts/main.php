@@ -21,6 +21,7 @@
 use backend\assets\AppAsset;
 use yii\helpers\Html;
 use kartik\widgets\Alert;
+use yii\helpers\Url;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -98,20 +99,20 @@ AppAsset::register($this);
 
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
-                            <a href="/user/setphoto">
+                            <a href="<?= Url::to(['user/setphoto']) ?>">
                                 <i class="icon-user"></i>
                                 设置头像
                             </a>
                         </li>
                         <li>
-                            <a href="<?= \yii\helpers\Url::to(['user/changepwd']) ?>">
+                            <a href="<?= Url::to(['user/changepwd']) ?>">
                                 <i class="icon-edit"></i>
                                 修改密码
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="/user/logout">
+                            <a href="<?= Url::to(['user/logout']) ?>">
                                 <i class="icon-off"></i>
                                 退出
                             </a>

@@ -8,7 +8,7 @@
 $this->params['breadcrumbs'] = [
     [
         'label'=>'路由管理',
-        'url'=>'/sys/menu'
+        'url'=>\yii\helpers\Url::toRoute(['sys/menu'])
     ],
     '添加路由'
 ];

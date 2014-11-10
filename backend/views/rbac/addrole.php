@@ -20,10 +20,11 @@
  */
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
+use yii\helpers\Url;
 $this->params['breadcrumbs'] = [
     [
         'label'=>'角色管理',
-        'url'=>'/rbac/roles',
+        'url'=>Url::toRoute(['rbac/roles'])
     ],
     ($model->isNewRecord)?'添加角色':'修改角色('.$model->name.')'
 ];
@@ -31,7 +32,7 @@ $this->params['breadcrumbs'] = [
 
 <div class="col-lg-6">
 <?php $form = ActiveForm::begin([
-    'validationUrl'=>'/rbac/validateitemname',
+    'validationUrl'=>Url::toRoute(['rbac/validateitemname']),
 ]) ?>
 
 <?= $form->field($model,'name',['enableAjaxValidation'=>true])->textInput() ?>
