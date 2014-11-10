@@ -28,8 +28,6 @@ $this->params['breadcrumbs'] = [
 ];
 ?>
 
-<?= \common\widgets\DateTimePicker::widget(['name'=>'xx']) ?>
-
 <?php
 Modal::begin([
     'id' => 'md',
