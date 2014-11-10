@@ -55,7 +55,7 @@ class UserController extends BackendController
         if(Yii::$app->request->isPost)
         {
             $model = new LoginForm($_POST);
-            $model->rememberMe = $_POST['rememberMe']?:false;
+            $model->rememberMe = Yii::$app->request->post('rememberMe')?:false;
             if($model->login())
                 return $this->goBack('/');
         }
