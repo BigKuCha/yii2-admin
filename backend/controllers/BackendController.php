@@ -89,6 +89,9 @@ class BackendController extends Controller
         Yii::$container->set('yii\captcha\CaptchaValidator',[
             'captchaAction'=>'home/captcha'
         ]);
+        Yii::$container->set('backend\behaviors\TestBehavior',[
+            'msg'=>'xxxxxxx',
+        ]);
     }
 
     /**

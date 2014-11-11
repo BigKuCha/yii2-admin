@@ -11,15 +11,17 @@ namespace backend\controllers;
 
 use backend\behaviors\TestBehavior;
 use yii\web\Controller;
+use yii\web\HttpException;
+use yii\web\NotAcceptableHttpException;
 
-class TestController extends Controller
+class TestController extends BackendController
 {
     public function behaviors()
     {
         return [
             [
                 'class'=>TestBehavior::className(),
-                'msg'=>'APEC开的真操蛋！'
+//                'msg'=>'APEC开的真操蛋！'
             ]
         ];
     }
