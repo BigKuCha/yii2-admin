@@ -29,7 +29,7 @@ $this->params['breadcrumbs'] = [
     '角色授予'
 ];
 ?>
-<div class="col-lg-6">
+<div class="col-lg-12">
     <?= \yii\widgets\DetailView::widget([
         'model' => $model,
         'attributes' => [
