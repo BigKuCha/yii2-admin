@@ -112,6 +112,16 @@ class UserController extends BackendController
         }
     }
 
+    public function actionLoadhtml()
+    {
+        if($id = Yii::$app->request->post('id'))
+            $model = TAdmUser::findOne($id);
+        else
+            $model = new TAdmUser();
+        return $this->renderPartial('loadhtml',[
+            'model'=>$model,
+        ]);
+    }
     /**
      * ajax验证是否存在
      * @return array

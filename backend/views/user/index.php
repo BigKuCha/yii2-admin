@@ -33,27 +33,18 @@ Modal::begin([
     'id' => 'md',
     'header' => '<h4>添加用户</h4>',
     'footer' => '<button type="button" class="btn btn-primary" onclick="sbmt()">确定</button>',
+    'clientOptions'=>[
+        'remote'=>'http://admin/user/loadhtml'
+    ]
 ]);
-$form = ActiveForm::begin([
-    'id' => 'userform',
-    'action' => '/user/adduser',
-    'validationUrl' => '/user/ajaxvalidate',
-])
-?>
-
-<?= $form->field($model, 'username', ['enableAjaxValidation' => true])->textInput() ?>
-<?= $form->field($model, 'password')->passwordInput() ?>
-<?= $form->field($model, 'password_repeat')->passwordInput() ?>
-<?= $form->field($model, 'verifyCode')->widget(\yii\captcha\Captcha::className(), []) ?>
-
-<?php
-$form->end();
 Modal::end();
 ?>
+
 <p>
     <?= \yii\helpers\Html::button('添加用户', [
         'class' => 'btn btn-sm btn-success',
         'onclick' => '$("#md").modal();'
+//        'onclick'=>'loadhtml(1)'
     ]) ?>
 </p>
 <?= \yii\grid\GridView::widget([
@@ -90,7 +81,16 @@ Modal::end();
     ],
 ]) ?>
 <script>
+    <?php $this->beginBlock('js_end') ?>
     function sbmt() {
         $('#userform').submit();
     }
+    function loadhtml(id)
+    {
+        $('.modal-body').load('/user/loadhtml',{id:id},function(){
+            $('#md').modal();
+        })
+    }
+    <?php $this->endBlock(); ?>
 </script>
+<?php $this->registerJs($this->blocks['js_end'],\yii\web\View::POS_END) ?>
