@@ -100,6 +100,7 @@ class UserController extends BackendController
         if(Yii::$app->request->isPost)
         {
             $model->load($_POST);
+            return print_r($model);
             if($model->load($_POST) && $model->save())
                 Yii::$app->session->setFlash('success');
             else
