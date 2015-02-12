@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e84dfb7462dd27889c157addf849c1bc",
+    "hash": "b738ae60073084f5ca4e3dfeb421ba40",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -102,6 +102,18 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
+<<<<<<< HEAD
+            "version": "3.1.44",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
+                "reference": "c95fe993f91e1da2069a26d84eaa372835842286"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c95fe993f91e1da2069a26d84eaa372835842286",
+                "reference": "c95fe993f91e1da2069a26d84eaa372835842286",
+=======
             "version": "3.1.38",
             "source": {
                 "type": "git",
@@ -112,6 +124,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/464cddbdea65411896468f40321e68abcc75a34c",
                 "reference": "464cddbdea65411896468f40321e68abcc75a34c",
+>>>>>>> 09bd15bf1509eb205e53b83e4bd2b512945c1d82
                 "shasum": ""
             },
             "require": {
@@ -2529,9 +2542,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "kartik-v/yii2-widgets": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.4.0"
