@@ -18,18 +18,21 @@ use yii\web\Controller;
 class TestBehavior extends Behavior
 {
     public $msg;
+
     public function events()
     {
         return [
-            Controller::EVENT_AFTER_ACTION=>'myafter',
+            Controller::EVENT_AFTER_ACTION => 'myafter',
         ];
     }
+
     public function myafter()
     {
-        echo '我来自TestBehavior!'.$this->msg.'<br>';
+        echo '我来自TestBehavior!' . $this->msg . '<br>';
     }
 
-    public static function Say(){
+    public static function Say()
+    {
         echo "我是来自TestBehavior的静态方法 <br>";
     }
 

@@ -20,7 +20,7 @@ class TestController extends BackendController
     {
         return [
             [
-                'class'=>TestBehavior::className(),
+                'class' => TestBehavior::className(),
 //                'msg'=>'APEC开的真操蛋！'
             ]
         ];
@@ -32,8 +32,8 @@ class TestController extends BackendController
      */
     public function actionEvent()
     {
-        $this->on(Controller::EVENT_AFTER_ACTION,[$this,'hello']);
-        $this->on(Controller::EVENT_AFTER_ACTION,function(){
+        $this->on(Controller::EVENT_AFTER_ACTION, [$this, 'hello']);
+        $this->on(Controller::EVENT_AFTER_ACTION, function () {
             echo "我是来自匿名函数的事件<br>";
         });
         self::say();
@@ -51,7 +51,7 @@ class TestController extends BackendController
      */
     public function Hello()
     {
-        echo 'hello World!';
+        echo 'hello World!<br>';
     }
 
 } 

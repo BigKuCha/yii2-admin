@@ -22,37 +22,35 @@ class SysController extends BackendController
     public function actionMenu()
     {
         $list = TMenu::find()->where('level=1')->all();
-        return $this->render('menu',[
-            'list'=>$list,
+        return $this->render('menu', [
+            'list' => $list,
         ]);
     }
+
     /*
      * 添加/修改菜单
      */
     public function actionMenumange()
     {
         $params = Yii::$app->request->get();
-        if($id = $_REQUEST['id'])
+        if ($id = $_REQUEST['id']) {
             $model = TMenu::findOne($id);
-        else
-        {
+        } else {
             $model = new TMenu();
             $model->loadDefaultValues();
             $model->parentid = $params['pid'];
-            $model->level = $params['level']+1;
+            $model->level = $params['level'] + 1;
         }
-        if(Yii::$app->request->isPost)
-        {
+        if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
-            if($model->save())
-            {
+            if ($model->save()) {
                 Yii::$app->session->setFlash('success');
                 return $this->redirect(['sys/menu']);
             }
         }
-        return $this->render('menumange',[
-            'model'=>$model,
-            'plevel'=>$params['level']
+        return $this->render('menumange', [
+            'model'  => $model,
+            'plevel' => $params['level']
         ]);
     }
 
@@ -62,24 +60,19 @@ class SysController extends BackendController
         $level = Yii::$app->request->get('level');
         //循环删除是为了在afterDelete删除对应的permission
         //一级菜单先删除孙子节点
-        if($level==1)
-        {
-            $son = TMenu::find()->where(['parentid'=>$id,'level'=>2])->all();
-            foreach($son as $s)
-            {
-                $gsons = TMenu::find()->where(['parentid'=>$s->id])->all();
-                foreach($gsons as $g)
-                {
+        if ($level == 1) {
+            $son = TMenu::find()->where(['parentid' => $id, 'level' => 2])->all();
+            foreach ($son as $s) {
+                $gsons = TMenu::find()->where(['parentid' => $s->id])->all();
+                foreach ($gsons as $g) {
                     $g->delete();
                 }
             }
         }
         //一二级菜单删除儿子节点
-        if($level<=2)
-        {
-            $son = TMenu::find()->where(['parentid'=>$id])->all();
-            foreach($son as $s)
-            {
+        if ($level <= 2) {
+            $son = TMenu::find()->where(['parentid' => $id])->all();
+            foreach ($son as $s) {
                 $s->delete();
             }
         }
@@ -88,21 +81,22 @@ class SysController extends BackendController
         Yii::$app->session->setFlash('success');
         return $this->redirect(['sys/menu']);
     }
+
     /**
      * Ajax 验证菜单名称
      * @return array
      */
     public function actionAjaxvalidate()
     {
-        if($id = Yii::$app->request->post('id'))
+        if ($id = Yii::$app->request->post('id')) {
             $model = TMenu::findOne($id);
-        else
+        } else {
             $model = new TMenu();
-        if(Yii::$app->request->isAjax)
-        {
+        }
+        if (Yii::$app->request->isAjax) {
             $model->load(Yii::$app->request->post());
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model,'menuname');
+            return ActiveForm::validate($model, 'menuname');
         }
     }
 }
