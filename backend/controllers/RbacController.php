@@ -53,14 +53,15 @@ class RbacController extends BackendController
      */
     public function actionManagerole()
     {
-        if ($rolename = $_REQUEST['id']) {
+        $request = Yii::$app->request;
+        if ($rolename = $request->get('id')) {
             $model = AuthItem::findOne($rolename);
         } else {
             $model = new AuthItem();
         }
-        if (Yii::$app->request->isPost) {
+        if ($request->isPost) {
             $auth = Yii::$app->authManager;
-            $model->load(Yii::$app->request->post());
+            $model->load($request->post());
             if ($model->isNewRecord) {
                 $role = $auth->createRole($model->name);
                 $role->description = $model->description;

@@ -32,14 +32,15 @@ class SysController extends BackendController
      */
     public function actionMenumange()
     {
-        $params = Yii::$app->request->get();
-        if ($id = $_REQUEST['id']) {
+        $request = Yii::$app->request;
+        $params = $request->get();
+        if ($id = $request->get('id')) {
             $model = TMenu::findOne($id);
         } else {
             $model = new TMenu();
             $model->loadDefaultValues();
             $model->parentid = $params['pid'];
-            $model->level = $params['level'] + 1;
+            $model->level = $request->get('level', 0) + 1;
         }
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
