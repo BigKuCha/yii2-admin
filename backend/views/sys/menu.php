@@ -20,7 +20,7 @@ $this->params['breadcrumbs'] = [
     <ul>
         <li>
             <span><i class="icon-leaf"></i> <?= Yii::$app->params['webname'] ?></span> <a href=""></a>
-            <a class="icon-plus" href="<?= Url::to(['sys/menumange','pid'=>0,'level'=>0]) ?>" title="添加"></a>
+            <a class="icon-plus" href="<?= Url::to(['sys/create','pid'=>0,'level'=>0]) ?>" title="添加"></a>
         </li>
         <li>
             <ul>
@@ -29,8 +29,8 @@ $this->params['breadcrumbs'] = [
                 <?php foreach ($list as $father): ?>
                     <li>
                         <span><i class="<?= $father->menuicon ?>"></i> <?= $father->menuname ?></span> <a href=""></a>
-                        <a class="icon-plus" href="<?= Url::toRoute(['sys/menumange','pid'=>$father->id,'level'=>$father->level]) ?>" title="添加"></a>
-                        <a class="icon-edit" href="<?= Url::toRoute(['sys/menumange','id'=>$father->id]) ?>"  title="编辑"></a>
+                        <a class="icon-plus" href="<?= Url::toRoute(['sys/create','pid'=>$father->id,'level'=>$father->level]) ?>" title="添加"></a>
+                        <a class="icon-edit" href="<?= Url::toRoute(['sys/edit','id'=>$father->id]) ?>"  title="编辑"></a>
                         <a class="icon-trash" href="<?= Url::toRoute(['sys/menudel','id'=>$father->id,'level'=>$father->level]) ?>" data-method="post"  data-confirm="确定要删除当前菜单以及所有子菜单吗?" title="删除"></a>
 
                         <ul>
@@ -47,9 +47,10 @@ $this->params['breadcrumbs'] = [
                                     <li>
                                         <span><i class="icon-minus-sign"></i> <?= $son->menuname ?></span> <a
                                             href=""></a>
-                                        <a class="icon-plus" href="<?= Url::toRoute(['sys/menumange','pid'=>$son->id,'level'=>$son->level]) ?>"  title="添加"></a>
-                                        <a class="icon-edit" href="javascript:;"
-                                           onclick="add('edit',<?= $son->id; ?> , <?= $son->level ?>)" title="编辑"></a>
+                                        <a class="icon-plus" href="<?= Url::toRoute(['sys/create','pid'=>$son->id,'level'=>$son->level]) ?>"  title="添加"></a>
+                                        <!--<a class="icon-edit" href="javascript:;"
+                                           onclick="add('edit',<?/*= $son->id; */?> , <?/*= $son->level */?>)" title="编辑"></a>-->
+                                        <a class="icon-edit" href="<?= Url::toRoute(['sys/menumange','id'=>$son->id]) ?>" title="编辑"></a>
                                         <a class="icon-trash" href="<?= Url::toRoute(['sys/menudel','id'=>$son->id,'level'=>$son->level]) ?>" data-method="post"  data-confirm="确定删除当前菜单以及所有子菜单吗" title="删除"></a>
                                         <ul>
                                             <!--三级菜单-->

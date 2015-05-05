@@ -27,19 +27,64 @@ class SysController extends BackendController
         ]);
     }
 
+    public function actionCreate()
+    {
+        $request = Yii::$app->request;
+        $model = new TMenu;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success');
+            return $this->redirect(['sys/menu']);
+        } else {
+            $model->loadDefaultValues();
+            $model->parentid = $request->get('pid', 0);
+            $model->level = $request->get('level', 0) + 1;
+            return $this->render('menumange', [
+                'model'  => $model,
+                'plevel' => $request->get('level', 0)
+            ]);
+        }
+    }
+
+    public function actionAdd()
+    {
+        $request = Yii::$app->request;
+        $model = new TMenu;
+        $model->loadDefaultValues();
+        $model->parentid = $request->get('pid', 0);
+        $model->level = $request->get('level', 0) + 1;
+        return $this->render('menumange', [
+            'model'  => $model,
+            'plevel' => $request->get('level', 0)
+        ]);
+    }
+
+    public function actionStore()
+    {
+        $model = new Tmenu;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success');
+            return $this->redirect(['sys/menu']);
+        }
+    }
+
+    public function actionEdit()
+    {
+        $request = Yii::$app->request;
+        $model = TMenu::findOne($request->get('id'));
+    }
+
     /*
      * 添加/修改菜单
      */
     public function actionMenumange()
     {
         $request = Yii::$app->request;
-        $params = $request->get();
         if ($id = $request->get('id')) {
             $model = TMenu::findOne($id);
         } else {
             $model = new TMenu();
             $model->loadDefaultValues();
-            $model->parentid = $params['pid'];
+            $model->parentid = $request->get('pid', 0);
             $model->level = $request->get('level', 0) + 1;
         }
         if (Yii::$app->request->isPost) {
@@ -51,7 +96,7 @@ class SysController extends BackendController
         }
         return $this->render('menumange', [
             'model'  => $model,
-            'plevel' => $params['level']
+            'plevel' => $request->get('level', 0)
         ]);
     }
 
