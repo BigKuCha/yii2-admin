@@ -22,11 +22,15 @@ class SysController extends BackendController
     public function actionMenu()
     {
         $list = TMenu::find()->where('level=1')->all();
-        return $this->render('menu', [
+        return $this->render('index', [
             'list' => $list,
         ]);
     }
 
+    /**
+     * 添加新菜单
+     * @return string|Response
+     */
     public function actionCreate()
     {
         $request = Yii::$app->request;
@@ -38,68 +42,36 @@ class SysController extends BackendController
             $model->loadDefaultValues();
             $model->parentid = $request->get('pid', 0);
             $model->level = $request->get('level', 0) + 1;
-            return $this->render('menumange', [
+            return $this->render('create', [
                 'model'  => $model,
                 'plevel' => $request->get('level', 0)
             ]);
         }
     }
 
-    public function actionAdd()
+    /**
+     * 更新菜单
+     * @param $id
+     * @return string|Response
+     */
+    public function actionUpdate($id)
     {
-        $request = Yii::$app->request;
-        $model = new TMenu;
-        $model->loadDefaultValues();
-        $model->parentid = $request->get('pid', 0);
-        $model->level = $request->get('level', 0) + 1;
-        return $this->render('menumange', [
-            'model'  => $model,
-            'plevel' => $request->get('level', 0)
-        ]);
-    }
-
-    public function actionStore()
-    {
-        $model = new Tmenu;
+        $model = TMenu::findOne($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success');
             return $this->redirect(['sys/menu']);
-        }
-    }
-
-    public function actionEdit()
-    {
-        $request = Yii::$app->request;
-        $model = TMenu::findOne($request->get('id'));
-    }
-
-    /*
-     * 添加/修改菜单
-     */
-    public function actionMenumange()
-    {
-        $request = Yii::$app->request;
-        if ($id = $request->get('id')) {
-            $model = TMenu::findOne($id);
         } else {
-            $model = new TMenu();
-            $model->loadDefaultValues();
-            $model->parentid = $request->get('pid', 0);
-            $model->level = $request->get('level', 0) + 1;
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-        if (Yii::$app->request->isPost) {
-            $model->load(Yii::$app->request->post());
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success');
-                return $this->redirect(['sys/menu']);
-            }
-        }
-        return $this->render('menumange', [
-            'model'  => $model,
-            'plevel' => $request->get('level', 0)
-        ]);
     }
 
+    /**
+     * 删除菜单
+     * @return Response
+     * @throws \Exception
+     */
     public function actionMenudel()
     {
         $id = Yii::$app->request->get('id');

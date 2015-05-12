@@ -30,7 +30,7 @@ $this->params['breadcrumbs'] = [
                     <li>
                         <span><i class="<?= $father->menuicon ?>"></i> <?= $father->menuname ?></span> <a href=""></a>
                         <a class="icon-plus" href="<?= Url::toRoute(['sys/create','pid'=>$father->id,'level'=>$father->level]) ?>" title="添加"></a>
-                        <a class="icon-edit" href="<?= Url::toRoute(['sys/edit','id'=>$father->id]) ?>"  title="编辑"></a>
+                        <a class="icon-edit" href="<?= Url::toRoute(['sys/update','id'=>$father->id]) ?>"  title="编辑"></a>
                         <a class="icon-trash" href="<?= Url::toRoute(['sys/menudel','id'=>$father->id,'level'=>$father->level]) ?>" data-method="post"  data-confirm="确定要删除当前菜单以及所有子菜单吗?" title="删除"></a>
 
                         <ul>
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'] = [
                                 <?php if ($son->level == 3): ?>
                                     <li>
                                         <span><i class="<?= $son->menuicon ?>"></i> <?= $son->menuname ?></span> <a href=""></a>
-                                        <a class="icon-edit" href="<?= Url::toRoute(['sys/menumange','id'=>$son->id]) ?>" title="编辑"></a>
+                                        <a class="icon-edit" href="<?= Url::toRoute(['sys/update','id'=>$son->id]) ?>" title="编辑"></a>
                                         <a class="icon-trash" href="<?= Url::toRoute(['sys/menudel','id'=>$son->id,'level'=>$son->level]) ?>" data-method="post"  data-confirm="确定删除当前菜单吗？" title="删除"></a>
                                     </li>
                                 <?php else: ?>
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'] = [
                                         <a class="icon-plus" href="<?= Url::toRoute(['sys/create','pid'=>$son->id,'level'=>$son->level]) ?>"  title="添加"></a>
                                         <!--<a class="icon-edit" href="javascript:;"
                                            onclick="add('edit',<?/*= $son->id; */?> , <?/*= $son->level */?>)" title="编辑"></a>-->
-                                        <a class="icon-edit" href="<?= Url::toRoute(['sys/menumange','id'=>$son->id]) ?>" title="编辑"></a>
+                                        <a class="icon-edit" href="<?= Url::toRoute(['sys/update','id'=>$son->id]) ?>" title="编辑"></a>
                                         <a class="icon-trash" href="<?= Url::toRoute(['sys/menudel','id'=>$son->id,'level'=>$son->level]) ?>" data-method="post"  data-confirm="确定删除当前菜单以及所有子菜单吗" title="删除"></a>
                                         <ul>
                                             <!--三级菜单-->
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'] = [
                                                 <li>
                                                     <span><i class="<?= $gson->menuicon ?>"></i> <?= $gson->menuname ?></span> <a
                                                         href=""></a>
-                                                    <a class="icon-edit" href="<?= Url::toRoute(['sys/menumange','id'=>$gson->id]) ?>" title="编辑"></a>
+                                                    <a class="icon-edit" href="<?= Url::toRoute(['sys/update','id'=>$gson->id]) ?>" title="编辑"></a>
                                                     <a class="icon-trash" href="<?= Url::toRoute(['sys/menudel','id'=>$gson->id,'level'=>$gson->level]) ?>" data-method="post"  data-confirm="确定删除吗?" title="删除"></a>
                                                 </li>
                                             <?php endforeach; ?>

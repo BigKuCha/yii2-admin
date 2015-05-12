@@ -1,24 +1,30 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: olebar
- * Date: 2014/10/23
- * Time: 11:59:51
+ *      ┏┓　　　┏┓
+ *    ┏┛┻━━━┛┻┓
+ *    ┃　　　　　　　┃
+ *    ┃　　　━　　　┃
+ *    ┃　┳┛　┗┳　┃
+ *    ┃　　　　　　　┃
+ *    ┃　　　┻　　　┃
+ *    ┃　　　　　　　┃
+ *    ┗━┓　　　┏━┛
+ *        ┃　　　┃   神兽保佑
+ *        ┃　　　┃   代码无BUG！
+ *         ┃　　　┗━━━┓
+ *        ┃　　　　　　　┣┓
+ *        ┃　　　　　　　┏┛
+ *        ┗┓┓┏━┳┓┏┛
+ *          ┃┫┫　┃┫┫
+ *          ┗┻┛　┗┻┛
  */
-$this->params['breadcrumbs'] = [
-    [
-        'label' => '路由管理',
-        'url'   => \yii\helpers\Url::toRoute(['sys/menu'])
-    ],
-    '添加路由'
-];
 use yii\helpers\Html;
 
 ?>
 
 <div class="col-lg-6">
     <?php $form = \kartik\widgets\ActiveForm::begin([
-        'action'        => '/sys/create',
+//        'action'        => '/sys/create',
         'validationUrl' => '/sys/ajaxvalidate',
     ]) ?>
 
@@ -39,7 +45,7 @@ use yii\helpers\Html;
     <?= Html::activeHiddenInput($model, 'parentid') ?>
     <?= Html::hiddenInput('id', $model->id) ?>
     <div class="form-group center">
-        <?= Html::submitButton('提交', ['class' => 'btn btn-lg btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '添加' : '更新', ['class' => 'btn btn-lg btn-primary']) ?>
     </div>
     <?php $form->end() ?>
 </div>
