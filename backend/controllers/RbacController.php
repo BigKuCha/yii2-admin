@@ -48,6 +48,48 @@ class RbacController extends BackendController
     }
 
     /**
+     * 添加角色
+     * @return string|Response
+     */
+    public function actionCreate()
+    {
+        $model = new AuthItem;
+        if ($model->load(Yii::$app->request->post())) {
+            $auth = Yii::$app->authManager;
+            $role = $auth->createRole($model->name);
+            $role->description = $model->description;
+            $auth->add($role);
+            Yii::$app->session->setFlash('success');
+            return $this->redirect(['rbac/roles']);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = AuthItem::findOne($id);
+        $request = Yii::$app->request;
+        $auth = Yii::$app->authManager;
+        if ($request->isPost && $model->load($request->post())) {
+            $name = $model->oldAttributes['name'];
+            $role = $auth->getRole($name);
+            $role->name = $model->name;
+            $role->description = $model->description;
+            if ($auth->update($name, $role)) {
+                Yii::$app->session->setFlash('success');
+                return $this->redirect(['rbac/roles']);
+            }
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
      * 添加/修改角色
      * @return string
      */
@@ -78,7 +120,7 @@ class RbacController extends BackendController
                 return $this->redirect(['rbac/roles']);
             }
         }
-        return $this->render('addrole', [
+        return $this->render('update', [
             'model' => $model,
         ]);
     }
